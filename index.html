@@ -3,197 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAC & ORFEO — Secretaría de Educación de Cali</title>
+<title>SAC &amp; ORFEO — Secretaría de Educación de Cali</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-:root {
-  --rojo-inst:      #C0272D;
-  --rojo-inst-grad: linear-gradient(135deg, #8B1A1A 0%, #C0272D 55%, #D32F2F 100%);
-  --verde:   #2E7D32; --verde-bg:   #E8F5E9;
-  --naranja: #E65100; --naranja-bg: #FFF3E0;
-  --rojo:    #C62828; --rojo-bg:    #FFEBEE;
-  --azul:    #1565C0; --azul-bg:    #E3F2FD;
-  --navy:    #1A3A6B;
-  --fondo: #EEF0F4; --card: #FFFFFF; --borde: #DDE1E8;
-  --texto: #18192A; --muted: #6B7280;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(--texto); font-size: 14px; min-height: 100vh; }
-
-/* ── HEADER ─────────────────────────────── */
-.header { background: var(--rojo-inst-grad); color: white; }
-.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; max-width: 1380px; margin: 0 auto; gap: 16px; flex-wrap: wrap; }
-.header-brand { display: flex; align-items: center; gap: 14px; }
-.escudo { width: 54px; height: 54px; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
-.header-titles h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 21px; font-weight: 800; letter-spacing: 0.4px; line-height: 1.1; }
-.header-titles p  { font-size: 12.5px; opacity: 0.82; margin-top: 3px; }
-.header-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.header-meta { text-align: right; }
-.meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; opacity: 0.65; }
-.meta-date  { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; margin-top: 1px; }
-.meta-note  { font-size: 11px; opacity: 0.65; margin-top: 3px; }
-
-/* DROPDOWN */
-.sub-select { background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.4); color: white; border-radius: 10px; padding: 8px 36px 8px 14px; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; outline: none; min-width: 250px; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='white' d='M6 8L0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-color: rgba(255,255,255,0.15); }
-.sub-select option { background: #8B1A1A; color: white; }
-
-/* SEARCH */
-.search-wrap { position: relative; }
-.search-input { background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.4); color: white; border-radius: 10px; padding: 8px 34px 8px 34px; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 600; outline: none; width: 210px; transition: background .2s, border .2s; }
-.search-input::placeholder { color: rgba(255,255,255,0.6); font-weight: 400; }
-.search-input:focus { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.7); }
-.search-icon  { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 13px; pointer-events: none; opacity: 0.8; }
-.search-clear { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; opacity: 0.7; display: none; background: none; border: none; color: white; padding: 2px; line-height: 1; }
-.search-clear:hover { opacity: 1; }
-
-/* ── SEARCH PANEL ───────────────────────── */
-.search-panel { display: none; background: white; border-bottom: 3px solid var(--rojo-inst); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-.search-panel.visible { display: block; }
-.search-panel-inner { max-width: 1380px; margin: 0 auto; padding: 18px 32px 22px; }
-.search-panel-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.search-panel-title { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 800; }
-.search-hint { font-size: 12px; color: var(--muted); }
-.search-no-results { padding: 20px; text-align: center; color: var(--muted); font-style: italic; font-size: 13px; }
-.person-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; }
-.person-card { border: 1px solid var(--borde); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
-.person-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.09); }
-.pcard-head { padding: 11px 14px; background: linear-gradient(90deg,#1A1A2E,#2D2D44); color: white; display: flex; align-items: center; gap: 9px; }
-.pavatar { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed',sans-serif; font-size: 15px; font-weight: 800; flex-shrink: 0; }
-.pname { font-size: 12.5px; font-weight: 700; line-height: 1.2; }
-.psub  { font-size: 10px; opacity: 0.6; margin-top: 2px; }
-.pkpis { display: flex; border-bottom: 1px solid var(--borde); }
-.pkpi  { flex: 1; padding: 9px 12px; text-align: center; }
-.pkpi + .pkpi { border-left: 1px solid var(--borde); }
-.pkpi-num { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 800; line-height: 1; }
-.pkpi-num.sac  { color: var(--rojo); }
-.pkpi-num.orf  { color: var(--navy); }
-.pkpi-num.tot  { color: #4527A0; }
-.pkpi-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); margin-top: 2px; }
-.pdetail { padding: 9px 12px; }
-.pdetail-sec { margin-bottom: 7px; }
-.pdetail-sec:last-child { margin-bottom: 0; }
-.pdetail-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); margin-bottom: 4px; }
-.pdetail-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 2px 0; border-bottom: 1px solid #F5F5F5; font-size: 11px; }
-.pdetail-row:last-child { border-bottom: none; }
-.pdetail-proc { flex: 1; color: var(--texto); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.pdetail-subsub { font-size: 9.5px; color: var(--muted); }
-.pval-red  { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800; color: var(--rojo); flex-shrink: 0; }
-.pval-navy { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800; color: var(--navy); flex-shrink: 0; }
-
-/* ── KPI ROW ────────────────────────────── */
-.main { max-width: 1380px; margin: 0 auto; padding: 26px 32px 32px; }
-.kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 22px; }
-.kpi { background: var(--card); border-radius: 12px; border: 1px solid var(--borde); border-top: 4px solid transparent; padding: 18px 20px 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); position: relative; transition: transform .15s; }
-.kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.09); }
-.kpi.r  { border-top-color: var(--rojo); }
-.kpi.r2 { border-top-color: var(--navy); }
-.kpi.o  { border-top-color: var(--naranja); }
-.kpi.b  { border-top-color: var(--azul); }
-.kpi-tag { position: absolute; top: 14px; right: 14px; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; }
-.kpi.r  .kpi-tag { background: var(--rojo-bg);   color: var(--rojo); }
-.kpi.r2 .kpi-tag { background: #E3F2FD;           color: var(--navy); }
-.kpi.o  .kpi-tag { background: var(--naranja-bg); color: var(--naranja); }
-.kpi.b  .kpi-tag { background: var(--azul-bg);    color: var(--azul); }
-.kpi-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.1px; color: var(--muted); margin-bottom: 6px; }
-.kpi-num { font-family: 'Barlow Condensed', sans-serif; font-size: 52px; font-weight: 800; line-height: 1; }
-.kpi.r  .kpi-num { color: var(--rojo); }
-.kpi.r2 .kpi-num { color: var(--navy); }
-.kpi.o  .kpi-num { color: var(--naranja); }
-.kpi.b  .kpi-num { color: var(--azul); }
-.kpi-delta { font-size: 12px; font-weight: 700; margin-top: 4px; min-height: 18px; }
-.delta-down { color: var(--verde); }
-.delta-up   { color: var(--rojo); }
-.delta-zero { color: var(--muted); font-weight: 600; }
-.kpi-desc { font-size: 12px; color: var(--muted); margin-top: 3px; }
-
-/* ── GRID PRINCIPAL ─────────────────────── */
-.grid-main { display: grid; grid-template-columns: 1fr 360px; gap: 18px; margin-bottom: 18px; }
-.right-col { display: flex; flex-direction: column; gap: 16px; }
-.card { background: var(--card); border-radius: 12px; border: 1px solid var(--borde); box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; }
-.card-head { padding: 14px 20px 11px; border-bottom: 1px solid var(--borde); }
-.card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; }
-.card-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
-.legend { display: flex; gap: 20px; padding: 9px 20px; border-bottom: 1px solid var(--borde); background: #FAFBFC; }
-.leg-item { display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: var(--muted); }
-.leg-dot { width: 10px; height: 10px; border-radius: 3px; }
-.chart-wrap { padding: 16px 20px 20px; }
-
-/* VS BLOCK */
-.vs-block { padding: 18px 20px; }
-.vs-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-bottom: 14px; }
-.vs-side { text-align: center; }
-.vs-sys { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; margin-bottom: 3px; }
-.vs-num-sac { font-family: 'Barlow Condensed', sans-serif; font-size: 46px; font-weight: 800; color: var(--rojo); line-height: 1; }
-.vs-num-orf { font-family: 'Barlow Condensed', sans-serif; font-size: 46px; font-weight: 800; color: var(--navy); line-height: 1; }
-.vs-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
-.vs-sep { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; color: var(--borde); }
-.total-box { background: var(--rojo-bg); border-radius: 10px; padding: 14px; text-align: center; }
-.total-num { font-family: 'Barlow Condensed', sans-serif; font-size: 38px; font-weight: 800; color: var(--rojo); line-height: 1; }
-.total-lbl { font-size: 12px; color: var(--rojo); font-weight: 600; margin-top: 5px; }
-
-/* FUNC ROWS */
-.func-row { display: grid; grid-template-columns: 20px 1fr 36px 54px; align-items: center; gap: 8px; padding: 8px 16px; border-bottom: 1px solid var(--borde); transition: background .1s; }
-.func-row:last-child { border-bottom: none; }
-.func-row:hover { background: #FAFBFC; }
-.func-rank { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; color: var(--muted); }
-.func-name { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.func-sys  { font-size: 10px; color: var(--naranja); margin-top: 1px; font-weight: 700; }
-.func-n-red  { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; color: var(--rojo); text-align: right; }
-.func-n-navy { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 800; color: var(--navy); text-align: right; }
-.bar-r   { height: 6px; background: var(--rojo-bg); border-radius: 3px; }
-.bar-r-f { height: 100%; border-radius: 3px; background: var(--rojo); }
-.bar-n   { height: 6px; background: #E3F2FD; border-radius: 3px; }
-.bar-n-f { height: 100%; border-radius: 3px; background: var(--navy); }
-.empty-msg { padding: 18px; font-size: 12px; color: var(--muted); text-align: center; font-style: italic; }
-
-/* VER MÁS */
-.ver-mas-wrap { padding: 8px 16px; border-top: 1px solid var(--borde); text-align: center; background: #FAFBFC; }
-.ver-mas-btn { background: none; border: 1px solid var(--borde); border-radius: 6px; padding: 5px 16px; font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700; color: var(--muted); cursor: pointer; transition: all .15s; }
-.ver-mas-btn:hover { background: white; border-color: var(--navy); color: var(--navy); }
-
-/* BOTTOM ROW */
-.grid-bottom { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 18px; }
-.mini-card { background: var(--card); border-radius: 12px; border: 1px solid var(--borde); box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; }
-.mini-head { padding: 11px 16px; border-bottom: 1px solid var(--borde); background: #FAFBFC; }
-.mini-title { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
-.mini-body { padding: 14px 16px; }
-.riesgo-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.riesgo-item:last-child { margin-bottom: 0; }
-.riesgo-pct { width: 42px; height: 42px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.riesgo-pct span { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800; }
-.riesgo-info { flex: 1; min-width: 0; }
-.riesgo-proc { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.riesgo-sub  { font-size: 11px; color: var(--muted); }
-
-/* TENDENCIA */
-.tend-legend { display: flex; gap: 14px; padding: 8px 14px 6px; border-bottom: 1px solid var(--borde); }
-.tend-leg-item { display: flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 600; color: var(--muted); }
-.tend-leg-dot { width: 20px; height: 3px; border-radius: 2px; }
-.tend-chart-area { padding: 8px 14px; height: 110px; }
-.tend-primer { padding: 20px 14px; text-align: center; font-size: 12px; color: var(--muted); font-style: italic; }
-.tend-nums { display: flex; gap: 12px; padding: 10px 14px 14px; border-top: 1px solid var(--borde); }
-.tend-lbl { font-size: 10.5px; color: var(--muted); }
-.tend-val { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 800; line-height: 1.1; }
-
-.footer { text-align: center; padding: 18px 32px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--borde); margin-top: 4px; }
+:root{--rojo-inst:#C0272D;--rojo-inst-grad:linear-gradient(135deg,#8B1A1A 0%,#C0272D 55%,#D32F2F 100%);--verde:#2E7D32;--verde-bg:#E8F5E9;--naranja:#E65100;--naranja-bg:#FFF3E0;--rojo:#C62828;--rojo-bg:#FFEBEE;--azul:#1565C0;--azul-bg:#E3F2FD;--navy:#1A3A6B;--fondo:#EEF0F4;--card:#FFFFFF;--borde:#DDE1E8;--texto:#18192A;--muted:#6B7280;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--fondo);color:var(--texto);font-size:14px;min-height:100vh;}
+.header{background:var(--rojo-inst-grad);color:white;}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;max-width:1380px;margin:0 auto;gap:16px;flex-wrap:wrap;}
+.header-brand{display:flex;align-items:center;gap:14px;}
+.escudo{width:54px;height:54px;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.header-titles h1{font-family:'Barlow Condensed',sans-serif;font-size:21px;font-weight:800;letter-spacing:0.4px;line-height:1.1;}
+.header-titles p{font-size:12.5px;opacity:0.82;margin-top:3px;}
+.header-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.header-meta{text-align:right;}
+.meta-label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;opacity:0.65;}
+.meta-date{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;margin-top:1px;}
+.meta-note{font-size:11px;opacity:0.65;margin-top:3px;}
+.sub-select{background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.4);color:white;border-radius:10px;padding:8px 36px 8px 14px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;outline:none;min-width:250px;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='white' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-color:rgba(255,255,255,0.15);}
+.sub-select option{background:#8B1A1A;color:white;}
+.search-wrap{position:relative;}
+.search-input{background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.4);color:white;border-radius:10px;padding:8px 34px 8px 34px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;outline:none;width:210px;transition:background .2s,border .2s;}
+.search-input::placeholder{color:rgba(255,255,255,0.6);font-weight:400;}
+.search-input:focus{background:rgba(255,255,255,0.25);border-color:rgba(255,255,255,0.7);}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none;opacity:0.8;}
+.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:13px;cursor:pointer;opacity:0.7;display:none;background:none;border:none;color:white;padding:2px;line-height:1;}
+.search-clear:hover{opacity:1;}
+.search-panel{display:none;background:white;border-bottom:3px solid var(--rojo-inst);box-shadow:0 4px 20px rgba(0,0,0,0.1);}
+.search-panel.visible{display:block;}
+.search-panel-inner{max-width:1380px;margin:0 auto;padding:18px 32px 22px;}
+.search-panel-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.search-panel-title{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;}
+.search-hint{font-size:12px;color:var(--muted);}
+.search-no-results{padding:20px;text-align:center;color:var(--muted);font-style:italic;font-size:13px;}
+.person-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;}
+.person-card{border:1px solid var(--borde);border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+.person-card:hover{box-shadow:0 3px 12px rgba(0,0,0,0.09);}
+.pcard-head{padding:11px 14px;background:linear-gradient(90deg,#1A1A2E,#2D2D44);color:white;display:flex;align-items:center;gap:9px;}
+.pavatar{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;flex-shrink:0;}
+.pname{font-size:12.5px;font-weight:700;line-height:1.2;}
+.psub{font-size:10px;opacity:0.6;margin-top:2px;}
+.pkpis{display:flex;border-bottom:1px solid var(--borde);}
+.pkpi{flex:1;padding:9px 12px;text-align:center;}
+.pkpi+.pkpi{border-left:1px solid var(--borde);}
+.pkpi-num{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;line-height:1;}
+.pkpi-num.sac{color:var(--rojo);}
+.pkpi-num.orf{color:var(--navy);}
+.pkpi-num.tot{color:#4527A0;}
+.pkpi-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);margin-top:2px;}
+.pdetail{padding:9px 12px;}
+.pdetail-sec{margin-bottom:7px;}
+.pdetail-sec:last-child{margin-bottom:0;}
+.pdetail-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;color:var(--muted);margin-bottom:4px;}
+.pdetail-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:2px 0;border-bottom:1px solid #F5F5F5;font-size:11px;}
+.pdetail-row:last-child{border-bottom:none;}
+.pdetail-proc{flex:1;color:var(--texto);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pdetail-subsub{font-size:9.5px;color:var(--muted);}
+.pval-red{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:var(--rojo);flex-shrink:0;}
+.pval-navy{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:var(--navy);flex-shrink:0;}
+.main{max-width:1380px;margin:0 auto;padding:26px 32px 32px;}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+.kpi{background:var(--card);border-radius:12px;border:1px solid var(--borde);border-top:4px solid transparent;padding:18px 20px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.06);position:relative;transition:transform .15s;}
+.kpi:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.09);}
+.kpi.r{border-top-color:var(--rojo);}
+.kpi.r2{border-top-color:var(--navy);}
+.kpi.o{border-top-color:var(--naranja);}
+.kpi.b{border-top-color:var(--azul);}
+.kpi-tag{position:absolute;top:14px;right:14px;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;}
+.kpi.r .kpi-tag{background:var(--rojo-bg);color:var(--rojo);}
+.kpi.r2 .kpi-tag{background:#E3F2FD;color:var(--navy);}
+.kpi.o .kpi-tag{background:var(--naranja-bg);color:var(--naranja);}
+.kpi.b .kpi-tag{background:var(--azul-bg);color:var(--azul);}
+.kpi-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.1px;color:var(--muted);margin-bottom:6px;}
+.kpi-num{font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:800;line-height:1;}
+.kpi.r .kpi-num{color:var(--rojo);}
+.kpi.r2 .kpi-num{color:var(--navy);}
+.kpi.o .kpi-num{color:var(--naranja);}
+.kpi.b .kpi-num{color:var(--azul);}
+.kpi-delta{font-size:12px;font-weight:700;margin-top:4px;min-height:18px;}
+.delta-down{color:var(--verde);}
+.delta-up{color:var(--rojo);}
+.delta-zero{color:var(--muted);font-weight:600;}
+.kpi-desc{font-size:12px;color:var(--muted);margin-top:3px;}
+.grid-main{display:grid;grid-template-columns:1fr 360px;gap:18px;margin-bottom:18px;}
+.right-col{display:flex;flex-direction:column;gap:16px;}
+.card{background:var(--card);border-radius:12px;border:1px solid var(--borde);box-shadow:0 1px 4px rgba(0,0,0,0.06);overflow:hidden;}
+.card-head{padding:14px 20px 11px;border-bottom:1px solid var(--borde);}
+.card-title{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;}
+.card-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.legend{display:flex;gap:20px;padding:9px 20px;border-bottom:1px solid var(--borde);background:#FAFBFC;}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--muted);}
+.leg-dot{width:10px;height:10px;border-radius:3px;}
+.chart-wrap{padding:16px 20px 20px;}
+.vs-block{padding:18px 20px;}
+.vs-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin-bottom:14px;}
+.vs-side{text-align:center;}
+.vs-sys{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:3px;}
+.vs-num-sac{font-family:'Barlow Condensed',sans-serif;font-size:46px;font-weight:800;color:var(--rojo);line-height:1;}
+.vs-num-orf{font-family:'Barlow Condensed',sans-serif;font-size:46px;font-weight:800;color:var(--navy);line-height:1;}
+.vs-lbl{font-size:11px;color:var(--muted);margin-top:2px;}
+.vs-sep{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--borde);}
+.total-box{background:var(--rojo-bg);border-radius:10px;padding:14px;text-align:center;}
+.total-num{font-family:'Barlow Condensed',sans-serif;font-size:38px;font-weight:800;color:var(--rojo);line-height:1;}
+.total-lbl{font-size:12px;color:var(--rojo);font-weight:600;margin-top:5px;}
+.func-row{display:grid;grid-template-columns:20px 1fr 36px 54px;align-items:center;gap:8px;padding:8px 16px;border-bottom:1px solid var(--borde);transition:background .1s;}
+.func-row:hover{background:#FAFBFC;}
+.func-rank{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--muted);}
+.func-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.func-sys{font-size:10px;color:var(--naranja);margin-top:1px;font-weight:700;}
+.func-n-red{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--rojo);text-align:right;}
+.func-n-navy{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--navy);text-align:right;}
+.bar-r{height:6px;background:var(--rojo-bg);border-radius:3px;}
+.bar-r-f{height:100%;border-radius:3px;background:var(--rojo);}
+.bar-n{height:6px;background:#E3F2FD;border-radius:3px;}
+.bar-n-f{height:100%;border-radius:3px;background:var(--navy);}
+.empty-msg{padding:18px;font-size:12px;color:var(--muted);text-align:center;font-style:italic;}
+.ver-mas-wrap{padding:8px 16px;border-top:1px solid var(--borde);text-align:center;background:#FAFBFC;}
+.ver-mas-btn{background:none;border:1px solid var(--borde);border-radius:6px;padding:5px 16px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s;}
+.ver-mas-btn:hover{background:white;border-color:var(--navy);color:var(--navy);}
+.grid-bottom{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:18px;}
+.mini-card{background:var(--card);border-radius:12px;border:1px solid var(--borde);box-shadow:0 1px 4px rgba(0,0,0,0.06);overflow:hidden;}
+.mini-head{padding:11px 16px;border-bottom:1px solid var(--borde);background:#FAFBFC;}
+.mini-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);}
+.mini-body{padding:14px 16px;}
+.riesgo-item{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.riesgo-item:last-child{margin-bottom:0;}
+.riesgo-pct{width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.riesgo-pct span{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;}
+.riesgo-info{flex:1;min-width:0;}
+.riesgo-proc{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.riesgo-sub{font-size:11px;color:var(--muted);}
+.tend-legend{display:flex;gap:14px;padding:8px 14px 6px;border-bottom:1px solid var(--borde);}
+.tend-leg-item{display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:var(--muted);}
+.tend-leg-dot{width:20px;height:3px;border-radius:2px;}
+.tend-chart-area{padding:8px 14px;height:110px;}
+.tend-primer{padding:20px 14px;text-align:center;font-size:12px;color:var(--muted);font-style:italic;}
+.tend-nums{display:flex;gap:12px;padding:10px 14px 14px;border-top:1px solid var(--borde);}
+.tend-lbl{font-size:10.5px;color:var(--muted);}
+.tend-val{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;line-height:1.1;}
+.footer{text-align:center;padding:18px 32px;font-size:12px;color:var(--muted);border-top:1px solid var(--borde);margin-top:4px;}
 </style>
 </head>
 <body>
-
-<!-- ═══ HEADER ═══ -->
 <header class="header">
   <div class="header-inner">
     <div class="header-brand">
-      <div class="escudo">🏛️</div>
+      <div class="escudo">&#127963;</div>
       <div class="header-titles">
         <h1>INFORME DE SEGUIMIENTO SAC Y ORFEO</h1>
-        <p id="header-sub">Secretaría de Educación &nbsp;·&nbsp; Alcaldía de Santiago de Cali &nbsp;·&nbsp; Todas las subsecretarías</p>
+        <p id="header-sub">Secretaría de Educación &nbsp;&middot;&nbsp; Alcaldía de Santiago de Cali &nbsp;&middot;&nbsp; Todas las subsecretarías</p>
       </div>
     </div>
     <div class="header-right">
       <select class="sub-select" id="subSelect" onchange="render()">
-        <option value="TODAS">📊 Todas las subsecretarías</option>
+        <option value="TODAS">&#128202; Todas las subsecretarías</option>
         <option value="Despacho">Despacho</option>
         <option value="Subsecretaría Administrativa y Financiera">Sub. Administrativa y Financiera</option>
         <option value="Subsecretaría de Calidad Educativa">Sub. de Calidad Educativa</option>
@@ -201,12 +165,12 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
         <option value="Subsecretaría de Planeación Sectorial">Sub. de Planeación Sectorial</option>
       </select>
       <div class="search-wrap">
-        <span class="search-icon">🔍</span>
+        <span class="search-icon">&#128269;</span>
         <input class="search-input" id="searchInput" type="text"
                placeholder="Buscar funcionario..."
                oninput="onSearch(this.value)"
                onkeydown="if(event.key==='Escape')clearSearch()" />
-        <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+        <button class="search-clear" id="searchClear" onclick="clearSearch()">&#x2715;</button>
       </div>
       <div class="header-meta">
         <div class="meta-label">Corte de datos</div>
@@ -217,100 +181,67 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
   </div>
 </header>
 
-<!-- ═══ PANEL BÚSQUEDA ═══ -->
 <div class="search-panel" id="searchPanel">
   <div class="search-panel-inner">
     <div class="search-panel-hdr">
       <div class="search-panel-title" id="searchPanelTitle">Resultados</div>
-      <div class="search-hint">Exposición total SAC + ORFEO · solo funcionarios con ≥1 vencido</div>
+      <div class="search-hint">Exposición total SAC + ORFEO &middot; solo funcionarios con &ge;1 vencido</div>
     </div>
     <div class="person-grid" id="searchResults"></div>
   </div>
 </div>
 
-<!-- ═══ MAIN ═══ -->
 <main class="main">
-
-  <!-- KPIs -->
   <div class="kpi-row">
-    <div class="kpi r">
-      <span class="kpi-tag">CRÍTICO</span>
-      <div class="kpi-label">SAC Vencidos</div>
-      <div class="kpi-num" id="k-sac-v">—</div>
-      <div class="kpi-delta" id="d-sac-v"></div>
-      <div class="kpi-desc">Radicados con plazo superado</div>
-    </div>
-    <div class="kpi r2">
-      <span class="kpi-tag">CRÍTICO</span>
-      <div class="kpi-label">ORFEO Vencidos</div>
-      <div class="kpi-num" id="k-orf-v">—</div>
-      <div class="kpi-delta" id="d-orf-v"></div>
-      <div class="kpi-desc">Documentos con plazo superado</div>
-    </div>
-    <div class="kpi o">
-      <span class="kpi-tag">ATENCIÓN</span>
-      <div class="kpi-label">SAC Por Vencer</div>
-      <div class="kpi-num" id="k-sac-pv">—</div>
-      <div class="kpi-delta"></div>
-      <div class="kpi-desc">Vencen en los próximos 5 días</div>
-    </div>
-    <div class="kpi b">
-      <span class="kpi-tag">TOTAL</span>
-      <div class="kpi-label">Total Vencidos</div>
-      <div class="kpi-num" id="k-total">—</div>
-      <div class="kpi-delta" id="d-total"></div>
-      <div class="kpi-desc">SAC + ORFEO combinados</div>
-    </div>
+    <div class="kpi r"><span class="kpi-tag">CR&Iacute;TICO</span><div class="kpi-label">SAC Vencidos</div><div class="kpi-num" id="k-sac-v">&mdash;</div><div class="kpi-delta" id="d-sac-v"></div><div class="kpi-desc">Radicados con plazo superado</div></div>
+    <div class="kpi r2"><span class="kpi-tag">CR&Iacute;TICO</span><div class="kpi-label">ORFEO Vencidos</div><div class="kpi-num" id="k-orf-v">&mdash;</div><div class="kpi-delta" id="d-orf-v"></div><div class="kpi-desc">Documentos con plazo superado</div></div>
+    <div class="kpi o"><span class="kpi-tag">ATENCI&Oacute;N</span><div class="kpi-label">SAC Por Vencer</div><div class="kpi-num" id="k-sac-pv">&mdash;</div><div class="kpi-delta"></div><div class="kpi-desc">Vencen en los próximos 5 días</div></div>
+    <div class="kpi b"><span class="kpi-tag">TOTAL</span><div class="kpi-label">Total Vencidos</div><div class="kpi-num" id="k-total">&mdash;</div><div class="kpi-delta" id="d-total"></div><div class="kpi-desc">SAC + ORFEO combinados</div></div>
   </div>
-
-  <!-- GRID PRINCIPAL -->
   <div class="grid-main">
     <div class="card">
       <div class="card-head">
         <div class="card-title" id="chart-title">Semáforo SAC por Proceso</div>
-        <div class="card-sub" id="chart-sub">Radicados abiertos · Corte 30 jun 2026</div>
+        <div class="card-sub" id="chart-sub">Radicados abiertos &middot; Corte 30 jun 2026</div>
       </div>
       <div class="legend">
         <div class="leg-item"><div class="leg-dot" style="background:var(--verde)"></div>A Tiempo (&gt;5 días)</div>
-        <div class="leg-item"><div class="leg-dot" style="background:var(--naranja)"></div>Por Vencer (0–5 días)</div>
-        <div class="leg-item"><div class="leg-dot" style="background:var(--rojo)"></div>Vencido (≤0 días)</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--naranja)"></div>Por Vencer (0&ndash;5 días)</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--rojo)"></div>Vencido (&le;0 días)</div>
       </div>
       <div class="chart-wrap" id="chart-wrap-div" style="height:260px"><canvas id="chartSemaforo"></canvas></div>
     </div>
-
     <div class="right-col">
       <div class="card">
         <div class="card-head">
-          <div class="card-title">SAC vs ORFEO — Vencidos</div>
+          <div class="card-title">SAC vs ORFEO &mdash; Vencidos</div>
           <div class="card-sub" id="vs-sub">Total combinado de ambos sistemas</div>
         </div>
         <div class="vs-block">
           <div class="vs-row">
-            <div class="vs-side"><div class="vs-sys">SAC</div><div class="vs-num-sac" id="vs-sac">—</div><div class="vs-lbl">vencidos</div></div>
+            <div class="vs-side"><div class="vs-sys">SAC</div><div class="vs-num-sac" id="vs-sac">&mdash;</div><div class="vs-lbl">vencidos</div></div>
             <div class="vs-sep">vs</div>
-            <div class="vs-side"><div class="vs-sys">ORFEO</div><div class="vs-num-orf" id="vs-orf">—</div><div class="vs-lbl">vencidos</div></div>
+            <div class="vs-side"><div class="vs-sys">ORFEO</div><div class="vs-num-orf" id="vs-orf">&mdash;</div><div class="vs-lbl">vencidos</div></div>
           </div>
-          <div class="total-box"><div class="total-num" id="vs-total">—</div><div class="total-lbl">Total vencidos en ambos sistemas</div></div>
+          <div class="total-box"><div class="total-num" id="vs-total">&mdash;</div><div class="total-lbl">Total vencidos en ambos sistemas</div></div>
         </div>
       </div>
       <div class="card" style="flex:1">
         <div class="card-head">
-          <div class="card-title">Top ORFEO — Vencidos por Funcionario</div>
+          <div class="card-title">Top ORFEO &mdash; Vencidos por Funcionario</div>
           <div class="card-sub" id="orf-func-sub">Radicados ORFEO sin gestionar</div>
         </div>
         <div id="orfFuncList"></div>
       </div>
     </div>
   </div>
-
-  <!-- FILA INFERIOR -->
   <div class="grid-bottom">
     <div class="mini-card">
-      <div class="mini-head"><div class="mini-title" id="sac-func-title">SAC — Top Funcionarios con Vencidos</div></div>
+      <div class="mini-head"><div class="mini-title" id="sac-func-title">SAC &mdash; Funcionarios con Vencidos</div></div>
       <div id="sacFuncList"></div>
     </div>
     <div class="mini-card">
-      <div class="mini-head"><div class="mini-title" id="riesgo-title">SAC — Procesos por % Vencido</div></div>
+      <div class="mini-head"><div class="mini-title" id="riesgo-title">SAC &mdash; Procesos por % Vencido</div></div>
       <div class="mini-body" id="riesgoList"></div>
     </div>
     <div class="mini-card">
@@ -321,408 +252,248 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
       </div>
       <div class="tend-chart-area" id="tend-chart-area"><canvas id="chartTend"></canvas></div>
       <div class="tend-primer" id="tend-primer" style="display:none">
-        📊 Tendencia disponible desde el 2º corte diario.<br>
+        &#128202; Tendencia disponible desde el 2&ordm; corte diario.<br>
         <span style="font-size:11px">Actualiza mañana con el siguiente Excel.</span>
       </div>
       <div class="tend-nums">
-        <div><div class="tend-lbl" id="tend-lbl-a">Primer corte</div><div class="tend-val" id="tend-val-a" style="color:var(--rojo)">544</div></div>
-        <div><div class="tend-lbl" id="tend-lbl-b">Último corte</div><div class="tend-val" id="tend-val-b" style="color:var(--rojo)">544</div></div>
+        <div><div class="tend-lbl" id="tend-lbl-a">Primer corte</div><div class="tend-val" id="tend-val-a" style="color:var(--rojo)">—</div></div>
+        <div><div class="tend-lbl" id="tend-lbl-b">Último corte</div><div class="tend-val" id="tend-val-b" style="color:var(--rojo)">—</div></div>
         <div><div class="tend-lbl">Variación SAC</div><div class="tend-val" id="tend-var" style="color:var(--muted)">—</div></div>
       </div>
     </div>
   </div>
 </main>
-
-<div class="footer">
-  Secretaría de Educación de Cali &nbsp;·&nbsp; Seguimiento SAC y ORFEO &nbsp;·&nbsp; Corte: 30 de junio de 2026
-  &nbsp;·&nbsp; <strong>SAC</strong>: MEN (&asymp;70% del volumen) &nbsp;·&nbsp; <strong>ORFEO</strong>: Alcaldía (&asymp;30% del volumen)
+<div class="footer">Secretaría de Educación de Cali &nbsp;&middot;&nbsp; Seguimiento SAC y ORFEO &nbsp;&middot;&nbsp; Corte: 30 DE JUNIO 2026
+  &nbsp;&middot;&nbsp; <strong>SAC</strong>: MEN (&asymp;70% del volumen) &nbsp;&middot;&nbsp; <strong>ORFEO</strong>: Alcaldía (&asymp;30% del volumen)
 </div>
 
 <script>
-/* ══════════════════════════════════════════════════
-   DATOS — Corte 30 de junio de 2026
-   ══════════════════════════════════════════════════ */
 const SAC = {
-  'Despacho': { v:395, pv:106, at:327, procesos:[
-    { n:'Inspección y Vigilancia', v:387, pv:102, at:311, func:[
-      {n:'Pedro Pablo Ramirez Lopez',v:191},{n:'Maria Del Mar Angulo Florez',v:37},
-      {n:'Fabián Alexis Lasprilla Gómez',v:34},{n:'Maira Alejandra Gonzalez',v:20},
-      {n:'Evelyn Marcela Agudelo',v:12},{n:'Andrea Solarte Bolaños',v:10},
-      {n:'Héctor Orlando Aragón',v:9},{n:'Valentina Guzmán Valencia',v:8},
-      {n:'Carlos Andrés Ospina',v:3},{n:'Diana Milena Torres',v:2}]},
-    {n:'Gestión Organizacional',v:5,pv:1,at:1,func:[]},
-    {n:'Despacho',v:2,pv:0,at:1,func:[]},
-    {n:'Gestión Contractual',v:1,pv:1,at:13,func:[]},
-    {n:'Gestión Jurídica',v:0,pv:2,at:1,func:[]},
-  ]},
-  'Subsecretaría Administrativa y Financiera': { v:125, pv:102, at:866, procesos:[
-    { n:'Liquidaciones Laborales', v:50, pv:17, at:167, func:[
-      {n:'Laura Marcela Cruz García',v:21},{n:'Pablo Andrés Villegas Acuña',v:15},
-      {n:'Harold Cabrera Martinez',v:14},{n:'Juan Pablo Abadía Sánchez',v:7},
-      {n:'Erika Alejandra Bermudez',v:7},{n:'Yolanda Loango',v:6},
-      {n:'Manuel Cortez Gonzalez',v:5},{n:'Juan Carlos Mosquera Medina',v:5},
-      {n:'Sandra Milena Giraldo',v:3},{n:'Jorge Humberto Restrepo',v:2}]},
-    {n:'Gestión y Desarrollo Humano',v:26,pv:10,at:55,func:[]},
-    {n:'Selección y Vinculación',v:18,pv:4,at:86,func:[]},
-    {n:'Sub. Adm. y Financiera',v:14,pv:1,at:25,func:[]},
-    {n:'Admón. Planta de Personal',v:6,pv:19,at:133,func:[]},
-    {n:'Prestaciones Sociales',v:5,pv:8,at:60,func:[]},
-    {n:'Admón. Eval. Desempeño',v:4,pv:8,at:57,func:[]},
-    {n:'Seguridad Social Integral',v:1,pv:1,at:85,func:[]},
-    {n:'Atención al Ciudadano',v:1,pv:1,at:4,func:[]},
-  ]},
-  'Subsecretaría de Calidad Educativa': { v:13, pv:2, at:48, procesos:[
-    { n:'Fortalecimiento de la Calidad', v:11, pv:2, at:30, func:[
-      {n:'Victor Hugo Viveros Bermudes',v:11},{n:'Francelly Gamboa Mejia',v:1},{n:'Mónica López Castro',v:1}]},
-    {n:'Sub. de Calidad Educativa',v:2,pv:0,at:1,func:[]},
-  ]},
-  'Subsecretaría de Cobertura Educativa': { v:3, pv:0, at:36, procesos:[
-    {n:'Acceso al Sistema Educativo',v:2,pv:0,at:16,func:[{n:'Jose Santiago Delgado Arroyo',v:2}]},
-    {n:'Permanencia Educativa',v:1,pv:0,at:16,func:[{n:'Jaime Andres Moreno Quintero',v:1}]},
-  ]},
-  'Subsecretaría de Planeación Sectorial': { v:8, pv:9, at:41, procesos:[
-    { n:'Mejoramiento Ambientes Esc.', v:8, pv:6, at:31, func:[
-      {n:'Ronny Nuñez Trujillo',v:3},{n:'Jose Bernardo Saldarriaga',v:2},
-      {n:'Andres Guillermo Daza Pabon',v:1},{n:'Diego Alejandro Quintero Arce',v:1},
-      {n:'Maria Camila Loaiza Caicedo',v:1}]},
-    {n:'Sub. Planeación Sectorial',v:0,pv:3,at:10,func:[]},
-  ]}
+  "Despacho": {
+    v:395, pv:106, at:327,
+    procesos:[
+      {n:"Sin proceso",v:395,pv:106,at:327,func:[{"n": "PEDRO PABLO RAMIREZ LOPEZ", "v": 191}, {"n": "MARIA DEL MAR  ANGULO FLOREZ", "v": 37}, {"n": "FABIÁN ALEXIS LASPRILLLA GÓMEZ", "v": 34}, {"n": "MAIRA ALEJANDRA  GONZALEZ", "v": 20}, {"n": "EVELYN MARCELA AGUDELO", "v": 12}, {"n": "ANDREA  SOLARTE BOLAÑOS", "v": 10}, {"n": "HÉCTOR ORLANDO ARAGÓN", "v": 9}, {"n": "MAYRA ELENA RIVAS QUIÑONES", "v": 8}, {"n": "LUIS FERNANDO QUIÑONEZ", "v": 8}, {"n": "JAILENE KARINA GALLEGO", "v": 8}, {"n": "VALENTINA  GUZMAN VALENCIA", "v": 8}, {"n": "CARLOS ALBERTO MIRANDA PALMITO", "v": 6}, {"n": "CAROLINA GALVEZ CIFUENTES", "v": 5}, {"n": "MARIAN RODRIGUEZ\tSALAS", "v": 5}, {"n": "NYDIA MONTERO NARVAEZ", "v": 5}, {"n": "DIANA MELISSA MONTEALEGRE SUAREZ", "v": 4}, {"n": "DIANA CAROLINA PARDO ZAPATA", "v": 4}, {"n": "EBLI YISSED CASTAÑEDA MERA", "v": 3}, {"n": "JULIAN HERNANDEZ ESCOBAR", "v": 3}, {"n": "LUZ MARY MURILLO VICTORIA", "v": 3}, {"n": "SARA MERCEDES RODAS SOTO", "v": 2}, {"n": "KATHERINE RAMOS RUBIO", "v": 2}, {"n": "CAROLINA SINISTERRA OBREGÓN", "v": 2}, {"n": "CARLOS FERNADO  BELTRAN LOPEZ", "v": 2}, {"n": "ANA RUBY  SOLIS CIFUENTES", "v": 1}, {"n": "ELIZABETH  BALANTA BANGUERA", "v": 1}, {"n": "DANIEL MOMPOTES", "v": 1}, {"n": "VICTORIA  EUGENIA ERAZO", "v": 1}]},
+    ]
+  },
+  "Subsecretar\u00eda Administrativa y Financiera": {
+    v:125, pv:102, at:866,
+    procesos:[
+      {n:"Sin proceso",v:125,pv:102,at:866,func:[{"n": "LAURA MARCELA CRUZ GARCÍA", "v": 21}, {"n": "PABLO ANDRÉS VILLEGAS ACUÑA", "v": 15}, {"n": "HAROLD CABRERA MARTINEZ", "v": 14}, {"n": "JUAN PABLO ABADÍA SÁNCHEZ", "v": 7}, {"n": "ERIKA ALEJANDRA BERMUDEZ", "v": 7}, {"n": "YOLANDA LOANGO", "v": 6}, {"n": "MANUEL CORTEZ GONZALEZ", "v": 5}, {"n": "LORENZA  SANTOS BARBOSA", "v": 5}, {"n": "AYDA MARCELA  PALACIOS GUERRA", "v": 5}, {"n": "JUAN CARLOS MOSQUERA MEDINA", "v": 5}, {"n": "LAURA SOFIA  MARQUEZ RIVAS", "v": 3}, {"n": "MARIA ELIZABETH ANGULO NUÑEZ", "v": 3}, {"n": "NAYLA JULIETH MENZA CASTAÑEDA", "v": 3}, {"n": "ROSMIRA CHAVARRIAGA RAMIREZ", "v": 2}, {"n": "DORA ELSY LONDOÑO OCAMPO", "v": 2}, {"n": "DIANA MARCELA LOPEZ", "v": 2}, {"n": "CLARA INÉS  ZULUAGA RÍOS", "v": 2}, {"n": "LUZ ADRIANA MOSQUERA VALLECILLA", "v": 2}, {"n": "WILHELM CAICEDO", "v": 2}, {"n": "MIGUEL ANGEL GALEANO OSPINA", "v": 1}, {"n": "VERONICA MOSQUERA GUERRERO", "v": 1}, {"n": "OSIRIS BENAVIDES", "v": 1}, {"n": "NICOLAS  GRUESO OBREGON", "v": 1}, {"n": "ALEJANDRO GOMEZ DUQUE", "v": 1}, {"n": "MAYBILENI  VALLEJO TOBAR", "v": 1}, {"n": "MARIELA ALOMIA PLACIDES", "v": 1}, {"n": "LUIS BERNARDO GIRALDO MOLINA", "v": 1}, {"n": "JUAN SEBASTIAN ANGULO MURILLO", "v": 1}, {"n": "JORGE ENRIQUE  PERTIAGA CHIRIPUA", "v": 1}, {"n": "FLOR DERLY MURILLO", "v": 1}, {"n": "DYAN JINETH RENGIFO LOZADA", "v": 1}, {"n": "CARLOS ALBERTO PAYAN BEDOYA", "v": 1}, {"n": "LINA MARYURI LOPEZ CAICEDO", "v": 1}]},
+    ]
+  },
+  "Subsecretar\u00eda de Calidad Educativa": {
+    v:13, pv:2, at:48,
+    procesos:[
+      {n:"Sin proceso",v:13,pv:2,at:48,func:[{"n": "VICTOR HUGO  VIVEROS  BERMUDES", "v": 11}, {"n": "FRANCELLY GAMBOA MEJIA", "v": 1}, {"n": "MÓNICA LÓPEZ CASTRO", "v": 1}]},
+    ]
+  },
+  "Subsecretar\u00eda de Cobertura Educativa": {
+    v:3, pv:0, at:36,
+    procesos:[
+      {n:"Sin proceso",v:3,pv:0,at:36,func:[{"n": "JOSE SANTIAGO DELGADO ARROYO", "v": 2}, {"n": "JAIME ANDRES MORENO QUINTERO", "v": 1}]},
+    ]
+  },
+  "Subsecretar\u00eda de Planeaci\u00f3n Sectorial": {
+    v:8, pv:9, at:41,
+    procesos:[
+      {n:"Sin proceso",v:8,pv:9,at:41,func:[{"n": "RONNY NUÑEZ TRUJILLO", "v": 3}, {"n": "JOSE BERNARDO SALDARRIAGA", "v": 2}, {"n": "ANDRES GUILLERMO DAZA PABON", "v": 1}, {"n": "DIEGO ALEJANDRO QUINTERO ARCE", "v": 1}, {"n": "MARIA CAMILA LOAIZA CAICEDO", "v": 1}]},
+    ]
+  },
 };
 
 const ORFEO = {
-  'Despacho': { v:680, pv:44, at:77, func:[
-    {n:'Usuario Radicador de Validaciones',v:79,sys:true},{n:'Pedro Pablo Ramirez Lopez',v:60},
-    {n:'Ximena Romero Guerrero',v:39},{n:'DESPACHO EDUCACIÓN',v:37,sys:true},
-    {n:'Deisy Zuleima Alegria Hernandez',v:29},{n:'Nydia Montero Narvaez',v:27},
-    {n:'Carolina Rivera',v:23},{n:'Laura Marcela Cruz Garcia',v:22},
-    {n:'Adriana Castillo Murillo',v:15},{n:'Felipe Andres Diaz',v:12},
-    {n:'Claudia Patricia Henao',v:9},{n:'Juan Felipe Muñoz',v:7}]},
-  'Subsecretaría Administrativa y Financiera': { v:229, pv:17, at:66, func:[
-    {n:'Diana Patricia Montes Peña',v:27},{n:'DESPACHO Sub. Adm. y Financiera',v:25,sys:true},
-    {n:'Dyan Gineth Rengifo Lozada',v:22},{n:'Paola Jennyfer Carvajal Taborda',v:15},
-    {n:'Juan Pablo Abadía Sánchez',v:14},{n:'Lorenza Santos Barbosa',v:10},
-    {n:'Miguel Angel Galeano Ospina',v:8},{n:'Ayda Marcela Palacios Guerra',v:8},
-    {n:'Isabel Cristina Mejia',v:6},{n:'Natalia Andrea Londoño',v:4}]},
-  'Subsecretaría de Calidad Educativa': { v:15, pv:4, at:6, func:[
-    {n:'Adriana Quiñones',v:7},{n:'DESPACHO Sub. Calidad Educativa',v:4,sys:true},
-    {n:'Mariela Vallecilla',v:2},{n:'Mayerling Giron',v:1}]},
-  'Subsecretaría de Cobertura Educativa': { v:5, pv:3, at:6, func:[
-    {n:'Ana Maria Angel Piedrahita',v:1},{n:'Carolina Moreno Ortiz',v:1},
-    {n:'Willington Murillo',v:1},{n:'Zobeida Idrobo Victoria',v:1}]},
-  'Subsecretaría de Planeación Sectorial': { v:26, pv:4, at:8, func:[
-    {n:'Jose Bernardo Saldarriaga Romero',v:13},{n:'Ricardo Corso Buitrago',v:4},
-    {n:'Melissa Varela Flor',v:2},{n:'Carlos Hernando Forero Rubio',v:2},
-    {n:'Diego Alejandro Quintero Arce',v:1},{n:'Daniel Eduardo Echeverri Villa',v:1},
-    {n:'Maria Camila Loaiza Caicedo',v:1},{n:'Wilkar Arroyo Castillo',v:1}]}
+  "Despacho": {
+    v:0, pv:0, at:0,
+    func:[
+    ]
+  },
+  "Subsecretar\u00eda Administrativa y Financiera": {
+    v:229, pv:17, at:66,
+    func:[
+    ]
+  },
+  "Subsecretar\u00eda de Calidad Educativa": {
+    v:15, pv:4, at:6,
+    func:[
+    ]
+  },
+  "Subsecretar\u00eda de Cobertura Educativa": {
+    v:5, pv:3, at:6,
+    func:[
+    ]
+  },
+  "Subsecretar\u00eda de Planeaci\u00f3n Sectorial": {
+    v:26, pv:4, at:8,
+    func:[
+    ]
+  },
 };
 
-const SUBS_ORDER = ['Despacho','Subsecretaría Administrativa y Financiera','Subsecretaría de Calidad Educativa','Subsecretaría de Cobertura Educativa','Subsecretaría de Planeación Sectorial'];
-const SUBS_SHORT = {'Despacho':'Despacho','Subsecretaría Administrativa y Financiera':'Adm. y Financiera','Subsecretaría de Calidad Educativa':'Calidad Educativa','Subsecretaría de Cobertura Educativa':'Cobertura Educativa','Subsecretaría de Planeación Sectorial':'Planeación Sectorial'};
+const SUBS_ORDER=['Despacho','Subsecretaría Administrativa y Financiera','Subsecretaría de Calidad Educativa','Subsecretaría de Cobertura Educativa','Subsecretaría de Planeación Sectorial'];
+const SUBS_SHORT={'Despacho':'Despacho','Subsecretaría Administrativa y Financiera':'Adm. y Financiera','Subsecretaría de Calidad Educativa':'Calidad Educativa','Subsecretaría de Cobertura Educativa':'Cobertura Educativa','Subsecretaría de Planeación Sectorial':'Planeación Sectorial'};
+const HISTORIAL=[{"f": "02/Jul", "sac": 554, "orf": 249}, {"f": "30/Jun", "sac": 544, "orf": 275}];
+const DELTA={"sac_v": -10, "orf_v": 26};
 
-/* Historial diario (crece con cada corte) */
-const HISTORIAL = [{"f":"30/06","sac":544,"orf":955}];
-/* Delta vs corte anterior (null = primer día) */
-const DELTA = {"sac_v":null,"orf_v":null};
-
-/* ══════════════════════════════════════════════════
-   ÍNDICE DE BÚSQUEDA
-   ══════════════════════════════════════════════════ */
-const FUNC_INDEX = (function() {
-  const idx = {};
-  SUBS_ORDER.forEach(sub => {
-    SAC[sub].procesos.forEach(proc => {
-      (proc.func || []).forEach(f => {
-        if (!idx[f.n]) idx[f.n] = { sacProcs:[], orfEntries:[], sacTotal:0, orfTotal:0 };
-        idx[f.n].sacProcs.push({ proc:proc.n, sub, v:f.v });
-        idx[f.n].sacTotal += f.v;
+const FUNC_INDEX=(function(){
+  const idx={};
+  SUBS_ORDER.forEach(sub=>{
+    SAC[sub].procesos.forEach(proc=>{
+      (proc.func||[]).forEach(f=>{
+        if(!idx[f.n])idx[f.n]={sacProcs:[],orfEntries:[],sacTotal:0,orfTotal:0};
+        idx[f.n].sacProcs.push({proc:proc.n,sub,v:f.v});
+        idx[f.n].sacTotal+=f.v;
       });
     });
-    ORFEO[sub].func.forEach(f => {
-      if (!idx[f.n]) idx[f.n] = { sacProcs:[], orfEntries:[], sacTotal:0, orfTotal:0 };
-      idx[f.n].orfEntries.push({ sub:SUBS_SHORT[sub], v:f.v, sys:f.sys });
-      idx[f.n].orfTotal += f.v;
+    ORFEO[sub].func.forEach(f=>{
+      if(!idx[f.n])idx[f.n]={sacProcs:[],orfEntries:[],sacTotal:0,orfTotal:0};
+      idx[f.n].orfEntries.push({sub:SUBS_SHORT[sub],v:f.v,sys:f.sys});
+      idx[f.n].orfTotal+=f.v;
     });
   });
   return idx;
 })();
 
-/* ══════════════════════════════════════════════════
-   BÚSQUEDA
-   ══════════════════════════════════════════════════ */
-function onSearch(query) {
-  const panel    = document.getElementById('searchPanel');
-  const clearBtn = document.getElementById('searchClear');
-  query = query.trim();
-  if (query.length < 2) {
-    panel.classList.remove('visible');
-    clearBtn.style.display = 'none';
-    return;
-  }
-  clearBtn.style.display = 'block';
-  panel.classList.add('visible');
-  const q = query.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
-  const matches = Object.entries(FUNC_INDEX)
-    .filter(([n]) => n.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').includes(q))
-    .sort(([,a],[,b]) => (b.sacTotal+b.orfTotal)-(a.sacTotal+a.orfTotal));
-
-  document.getElementById('searchPanelTitle').textContent = matches.length
-    ? `${matches.length} funcionario${matches.length>1?'s':''} con vencidos — "${query}"`
-    : `Sin resultados para "${query}"`;
-
-  if (!matches.length) {
-    document.getElementById('searchResults').innerHTML = '<div class="search-no-results">No se encontró ningún funcionario con vencidos con ese nombre.</div>';
-    return;
-  }
-  document.getElementById('searchResults').innerHTML = matches.map(([name,d]) => {
-    const total = d.sacTotal + d.orfTotal;
-    const initials = name.split(' ').filter(w=>/^[A-ZÁÉÍÓÚÑ]/i.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join('');
-    const allSubs = [...new Set([...d.sacProcs.map(p=>SUBS_SHORT[p.sub]),...d.orfEntries.map(e=>e.sub)])].join(', ');
-    const sacRows = d.sacProcs.length
-      ? d.sacProcs.map(p=>`<div class="pdetail-row"><div><div class="pdetail-proc">${p.proc}</div><div class="pdetail-subsub">${SUBS_SHORT[p.sub]}</div></div><div class="pval-red">${p.v}</div></div>`).join('')
-      : '<div class="pdetail-row" style="color:var(--muted);font-size:11px;font-style:italic">Sin vencidos SAC registrados</div>';
-    const orfRows = d.orfEntries.length
-      ? d.orfEntries.map(e=>`<div class="pdetail-row"><div class="pdetail-proc">${e.sub}${e.sys?' <span style="font-size:9px;color:var(--naranja)">(sistema)</span>':''}</div><div class="pval-navy">${e.v}</div></div>`).join('')
-      : '<div class="pdetail-row" style="color:var(--muted);font-size:11px;font-style:italic">Sin vencidos ORFEO registrados</div>';
-    return `<div class="person-card">
-      <div class="pcard-head"><div class="pavatar">${initials}</div><div><div class="pname">${name}</div><div class="psub">${allSubs}</div></div></div>
-      <div class="pkpis">
-        <div class="pkpi"><div class="pkpi-num sac">${d.sacTotal||'—'}</div><div class="pkpi-lbl">SAC V.</div></div>
-        <div class="pkpi"><div class="pkpi-num orf">${d.orfTotal||'—'}</div><div class="pkpi-lbl">ORFEO V.</div></div>
-        <div class="pkpi"><div class="pkpi-num tot">${total}</div><div class="pkpi-lbl">Total</div></div>
-      </div>
-      <div class="pdetail">
-        ${d.sacProcs.length?`<div class="pdetail-sec"><div class="pdetail-lbl">📕 SAC — por proceso</div>${sacRows}</div>`:''}
-        ${d.orfEntries.length?`<div class="pdetail-sec"><div class="pdetail-lbl">📘 ORFEO — por subsecretaría</div>${orfRows}</div>`:''}
-      </div>
-    </div>`;
+function onSearch(query){
+  const panel=document.getElementById('searchPanel');
+  const clearBtn=document.getElementById('searchClear');
+  query=query.trim();
+  if(query.length<2){panel.classList.remove('visible');clearBtn.style.display='none';return;}
+  clearBtn.style.display='block';panel.classList.add('visible');
+  const q=query.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+  const matches=Object.entries(FUNC_INDEX).filter(([n])=>n.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').includes(q)).sort(([,a],[,b])=>(b.sacTotal+b.orfTotal)-(a.sacTotal+a.orfTotal));
+  document.getElementById('searchPanelTitle').textContent=matches.length?`${matches.length} funcionario${matches.length>1?'s':''} con vencidos — "${query}"`:(`Sin resultados para "${query}"`);
+  if(!matches.length){document.getElementById('searchResults').innerHTML='<div class="search-no-results">No se encontró ningún funcionario con vencidos con ese nombre.</div>';return;}
+  document.getElementById('searchResults').innerHTML=matches.map(([name,d])=>{
+    const total=d.sacTotal+d.orfTotal;
+    const initials=name.split(' ').filter(w=>/^[A-ZÁÉÍÓÚÑ]/i.test(w)).slice(0,2).map(w=>w[0].toUpperCase()).join('');
+    const allSubs=[...new Set([...d.sacProcs.map(p=>SUBS_SHORT[p.sub]),...d.orfEntries.map(e=>e.sub)])].join(', ');
+    const sacRows=d.sacProcs.length?d.sacProcs.map(p=>`<div class="pdetail-row"><div><div class="pdetail-proc">${p.proc}</div><div class="pdetail-subsub">${SUBS_SHORT[p.sub]}</div></div><div class="pval-red">${p.v}</div></div>`).join(''):'<div class="pdetail-row" style="color:var(--muted);font-size:11px;font-style:italic">Sin vencidos SAC</div>';
+    const orfRows=d.orfEntries.length?d.orfEntries.map(e=>`<div class="pdetail-row"><div class="pdetail-proc">${e.sub}${e.sys?' <span style="font-size:9px;color:var(--naranja)">(sistema)</span>':''}</div><div class="pval-navy">${e.v}</div></div>`).join(''):'<div class="pdetail-row" style="color:var(--muted);font-size:11px;font-style:italic">Sin vencidos ORFEO</div>';
+    return`<div class="person-card"><div class="pcard-head"><div class="pavatar">${initials}</div><div><div class="pname">${name}</div><div class="psub">${allSubs}</div></div></div><div class="pkpis"><div class="pkpi"><div class="pkpi-num sac">${d.sacTotal||'—'}</div><div class="pkpi-lbl">SAC V.</div></div><div class="pkpi"><div class="pkpi-num orf">${d.orfTotal||'—'}</div><div class="pkpi-lbl">ORFEO V.</div></div><div class="pkpi"><div class="pkpi-num tot">${total}</div><div class="pkpi-lbl">Total</div></div></div><div class="pdetail">${d.sacProcs.length?`<div class="pdetail-sec"><div class="pdetail-lbl">📕 SAC — por proceso</div>${sacRows}</div>`:''} ${d.orfEntries.length?`<div class="pdetail-sec"><div class="pdetail-lbl">📘 ORFEO — por subsecretaría</div>${orfRows}</div>`:''}</div></div>`;
   }).join('');
 }
+function clearSearch(){const inp=document.getElementById('searchInput');inp.value='';inp.dispatchEvent(new Event('input'));inp.focus();}
 
-function clearSearch() {
-  const inp = document.getElementById('searchInput');
-  inp.value = '';
-  inp.dispatchEvent(new Event('input'));
-  inp.focus();
+function showDelta(id,delta){
+  const el=document.getElementById(id);if(!el)return;
+  if(delta===null||delta===undefined){el.innerHTML='';return;}
+  if(delta===0){el.innerHTML='<span class="delta-zero">= sin cambio vs ayer</span>';return;}
+  const down=delta<0;
+  el.innerHTML=`<span class="delta-${down?'down':'up'}">${down?'▼':'▲'} ${Math.abs(delta).toLocaleString('es-CO')} vs ayer</span>`;
 }
 
-/* ══════════════════════════════════════════════════
-   DELTA BADGES
-   ══════════════════════════════════════════════════ */
-function showDelta(id, delta) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  if (delta === null || delta === undefined) { el.innerHTML = ''; return; }
-  if (delta === 0) { el.innerHTML = '<span class="delta-zero">= sin cambio vs ayer</span>'; return; }
-  const down = delta < 0;
-  el.innerHTML = `<span class="delta-${down?'down':'up'}">${down?'▼':'▲'} ${Math.abs(delta).toLocaleString('es-CO')} vs ayer</span>`;
+function buildList(funcs,containerId,color,limit=8){
+  const el=document.getElementById(containerId);
+  if(!funcs||!funcs.length){el.innerHTML='<div class="empty-msg">Sin datos disponibles</div>';return;}
+  const isRed=color==='red';
+  const maxV=funcs[0].v;
+  const numCls=isRed?'func-n-red':'func-n-navy';
+  const barCls=isRed?'bar-r':'bar-n';
+  const filCls=isRed?'bar-r-f':'bar-n-f';
+  let html=funcs.map((f,i)=>`<div class="func-row" id="${containerId}-r${i}"${i>=limit?' style="display:none"':''}><div class="func-rank">${i+1}</div><div><div class="func-name" title="${f.n}">${f.n}</div>${f.sys?'<div class="func-sys">⚠ sistema</div>':''}</div><div class="${numCls}">${f.v}</div><div><div class="${barCls}"><div class="${filCls}" style="width:${Math.round(f.v/maxV*100)}%"></div></div></div></div>`).join('');
+  if(funcs.length>limit)html+=`<div class="ver-mas-wrap"><button class="ver-mas-btn" onclick="toggleVerMas('${containerId}',this,${funcs.length},${limit})">Ver todos (${funcs.length}) ▼</button></div>`;
+  el.innerHTML=html;
+}
+function toggleVerMas(id,btn,total,limit){
+  const first=document.getElementById(id+'-r'+limit);
+  if(!first)return;
+  const collapsed=first.style.display==='none';
+  for(let i=limit;i<total;i++){const r=document.getElementById(id+'-r'+i);if(r)r.style.display=collapsed?'':'none';}
+  btn.textContent=collapsed?'Colapsar ▲':`Ver todos (${total}) ▼`;
 }
 
-/* ══════════════════════════════════════════════════
-   LISTAS DE FUNCIONARIOS CON VER MÁS
-   ══════════════════════════════════════════════════ */
-function buildList(funcs, containerId, color, limit=8) {
-  const el = document.getElementById(containerId);
-  if (!funcs || !funcs.length) { el.innerHTML='<div class="empty-msg">Sin datos disponibles</div>'; return; }
-  const isRed = color === 'red';
-  const maxV  = funcs[0].v;
-  const numCls = isRed ? 'func-n-red'  : 'func-n-navy';
-  const barCls = isRed ? 'bar-r'       : 'bar-n';
-  const filCls = isRed ? 'bar-r-f'     : 'bar-n-f';
-
-  let html = funcs.map((f, i) => `
-    <div class="func-row" id="${containerId}-r${i}" ${i>=limit?'style="display:none"':''}>
-      <div class="func-rank">${i+1}</div>
-      <div><div class="func-name" title="${f.n}">${f.n}</div>${f.sys?'<div class="func-sys">⚠ sistema</div>':''}</div>
-      <div class="${numCls}">${f.v}</div>
-      <div><div class="${barCls}"><div class="${filCls}" style="width:${Math.round(f.v/maxV*100)}%"></div></div></div>
-    </div>`).join('');
-
-  if (funcs.length > limit) {
-    html += `<div class="ver-mas-wrap">
-      <button class="ver-mas-btn" onclick="toggleVerMas('${containerId}',this,${funcs.length},${limit})">
-        Ver todos (${funcs.length}) ▼
-      </button>
-    </div>`;
-  }
-  el.innerHTML = html;
+let myChart=null;
+function renderChart(labels,atData,pvData,vData,nRows){
+  document.getElementById('chart-wrap-div').style.height=Math.max(220,nRows*42)+'px';
+  if(myChart){myChart.destroy();myChart=null;}
+  myChart=new Chart(document.getElementById('chartSemaforo').getContext('2d'),{type:'bar',data:{labels,datasets:[{label:'A Tiempo',data:atData,backgroundColor:'#2E7D32'},{label:'Por Vencer',data:pvData,backgroundColor:'#E65100'},{label:'Vencido',data:vData,backgroundColor:'#C62828'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${ctx.parsed.x.toLocaleString('es-CO')}`}}},scales:{x:{stacked:true,grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{family:'Nunito',size:11},color:'#9CA3AF'}},y:{stacked:true,grid:{display:false},ticks:{font:{family:'Nunito',size:12},color:'#18192A'}}}}});
 }
 
-function toggleVerMas(id, btn, total, limit) {
-  const collapsed = document.getElementById(id+'-r'+limit).style.display === 'none';
-  for (let i = limit; i < total; i++) {
-    const r = document.getElementById(id+'-r'+i);
-    if (r) r.style.display = collapsed ? '' : 'none';
-  }
-  btn.textContent = collapsed ? 'Colapsar ▲' : `Ver todos (${total}) ▼`;
-}
-
-/* ══════════════════════════════════════════════════
-   SEMÁFORO
-   ══════════════════════════════════════════════════ */
-let myChart = null;
-function renderChart(labels, atData, pvData, vData, nRows) {
-  document.getElementById('chart-wrap-div').style.height = Math.max(220, nRows*42) + 'px';
-  if (myChart) { myChart.destroy(); myChart = null; }
-  myChart = new Chart(document.getElementById('chartSemaforo').getContext('2d'), {
-    type:'bar',
-    data:{ labels, datasets:[
-      {label:'A Tiempo',  data:atData, backgroundColor:'#2E7D32'},
-      {label:'Por Vencer',data:pvData, backgroundColor:'#E65100'},
-      {label:'Vencido',   data:vData,  backgroundColor:'#C62828'},
-    ]},
-    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: ${ctx.parsed.x.toLocaleString('es-CO')}`}}},
-      scales:{ x:{stacked:true,grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{family:'Nunito',size:11},color:'#9CA3AF'}},
-               y:{stacked:true,grid:{display:false},ticks:{font:{family:'Nunito',size:12},color:'#18192A'}} }}
-  });
-}
-
-/* ══════════════════════════════════════════════════
-   TENDENCIA DIARIA
-   ══════════════════════════════════════════════════ */
-let tendChart = null;
-function buildTendChart() {
-  const area   = document.getElementById('tend-chart-area');
-  const primer = document.getElementById('tend-primer');
-  const legend = document.getElementById('tend-legend');
-
-  if (HISTORIAL.length < 2) {
-    area.style.display   = 'none';
-    legend.style.display = 'none';
-    primer.style.display = 'block';
-    document.getElementById('tend-title').textContent = 'Evolución Diaria SAC + ORFEO';
-    document.getElementById('tend-lbl-a').textContent = 'Corte actual';
-    document.getElementById('tend-val-a').textContent = HISTORIAL[0]?.sac ?? '—';
-    document.getElementById('tend-val-a').style.color = 'var(--rojo)';
-    document.getElementById('tend-lbl-b').textContent = 'ORFEO actual';
-    document.getElementById('tend-val-b').textContent = HISTORIAL[0]?.orf ?? '—';
-    document.getElementById('tend-val-b').style.color = 'var(--navy)';
-    document.getElementById('tend-var').textContent = '—';
-    document.getElementById('tend-var').style.color = 'var(--muted)';
+let tendChart=null;
+function buildTendChart(){
+  const area=document.getElementById('tend-chart-area');
+  const primer=document.getElementById('tend-primer');
+  const legend=document.getElementById('tend-legend');
+  if(HISTORIAL.length<2){
+    area.style.display='none';legend.style.display='none';primer.style.display='block';
+    const h0=HISTORIAL[0]||{sac:'—',orf:'—',f:'—'};
+    document.getElementById('tend-lbl-a').textContent='SAC '+h0.f;
+    document.getElementById('tend-val-a').textContent=typeof h0.sac==='number'?h0.sac.toLocaleString('es-CO'):h0.sac;
+    document.getElementById('tend-val-a').style.color='var(--rojo)';
+    document.getElementById('tend-lbl-b').textContent='ORFEO '+h0.f;
+    document.getElementById('tend-val-b').textContent=typeof h0.orf==='number'?h0.orf.toLocaleString('es-CO'):h0.orf;
+    document.getElementById('tend-val-b').style.color='var(--navy)';
+    document.getElementById('tend-var').textContent='—';
     return;
   }
-
-  area.style.display   = 'block';
-  legend.style.display = 'flex';
-  primer.style.display = 'none';
-
-  const last = HISTORIAL.slice(-14);
-  const first = HISTORIAL[0];
-  const latest = HISTORIAL[HISTORIAL.length - 1];
-  const sacDelta = latest.sac - first.sac;
-  const sacPct   = first.sac > 0 ? Math.round(sacDelta / first.sac * 100) : 0;
-
-  document.getElementById('tend-title').textContent = `Evolución Diaria — últimos ${last.length} cortes`;
-  document.getElementById('tend-lbl-a').textContent = `SAC ${first.f}`;
-  document.getElementById('tend-val-a').textContent = first.sac.toLocaleString('es-CO');
-  document.getElementById('tend-val-a').style.color = 'var(--rojo)';
-  document.getElementById('tend-lbl-b').textContent = `SAC ${latest.f}`;
-  document.getElementById('tend-val-b').textContent = latest.sac.toLocaleString('es-CO');
-  document.getElementById('tend-val-b').style.color = 'var(--rojo)';
-  const varColor = sacDelta <= 0 ? 'var(--verde)' : 'var(--rojo)';
-  document.getElementById('tend-var').textContent = (sacDelta >= 0 ? '+' : '') + sacPct + '%';
-  document.getElementById('tend-var').style.color = varColor;
-
-  if (tendChart) { tendChart.destroy(); tendChart = null; }
-  tendChart = new Chart(document.getElementById('chartTend').getContext('2d'), {
-    type:'line',
-    data:{ labels: last.map(h=>h.f), datasets:[
-      { data: last.map(h=>h.sac), borderColor:'#C62828', backgroundColor:'rgba(198,40,40,0.08)', fill:true, tension:0.35, pointRadius:3, borderWidth:2, label:'SAC' },
-      { data: last.map(h=>h.orf), borderColor:'#1A3A6B', backgroundColor:'rgba(26,58,107,0.05)', fill:false, tension:0.35, pointRadius:2, borderWidth:1.5, label:'ORFEO', borderDash:[4,3] }
-    ]},
-    options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false} },
-      scales:{
-        x:{ grid:{display:false}, ticks:{font:{size:9},color:'#9CA3AF',maxRotation:45} },
-        y:{ grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:9},color:'#9CA3AF'}, min:0 }
-      }}
-  });
+  area.style.display='block';legend.style.display='flex';primer.style.display='none';
+  const last=HISTORIAL.slice(-14);
+  const first=HISTORIAL[0];const latest=HISTORIAL[HISTORIAL.length-1];
+  const sacDelta=latest.sac-first.sac;
+  const sacPct=first.sac>0?Math.round(sacDelta/first.sac*100):0;
+  document.getElementById('tend-title').textContent=`Evolución Diaria — últimos ${last.length} cortes`;
+  document.getElementById('tend-lbl-a').textContent='SAC '+first.f;
+  document.getElementById('tend-val-a').textContent=first.sac.toLocaleString('es-CO');
+  document.getElementById('tend-val-a').style.color='var(--rojo)';
+  document.getElementById('tend-lbl-b').textContent='SAC '+latest.f;
+  document.getElementById('tend-val-b').textContent=latest.sac.toLocaleString('es-CO');
+  document.getElementById('tend-val-b').style.color='var(--rojo)';
+  document.getElementById('tend-var').textContent=(sacDelta>=0?'+':'')+sacPct+'%';
+  document.getElementById('tend-var').style.color=sacDelta<=0?'var(--verde)':'var(--rojo)';
+  if(tendChart){tendChart.destroy();tendChart=null;}
+  tendChart=new Chart(document.getElementById('chartTend').getContext('2d'),{type:'line',data:{labels:last.map(h=>h.f),datasets:[{data:last.map(h=>h.sac),borderColor:'#C62828',backgroundColor:'rgba(198,40,40,0.08)',fill:true,tension:0.35,pointRadius:3,borderWidth:2,label:'SAC'},{data:last.map(h=>h.orf),borderColor:'#1A3A6B',backgroundColor:'rgba(26,58,107,0.05)',fill:false,tension:0.35,pointRadius:2,borderWidth:1.5,label:'ORFEO',borderDash:[4,3]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9},color:'#9CA3AF',maxRotation:45}},y:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9},color:'#9CA3AF'},min:0}}}});
 }
 
-/* ══════════════════════════════════════════════════
-   RENDER PRINCIPAL
-   ══════════════════════════════════════════════════ */
-function render() {
-  const sel = document.getElementById('subSelect').value;
-  let sacV, sacPV, sacAT, orfV, sacFuncs, orfFuncs, chartLabels, chartAT, chartPV, chartV, chartRows;
-
-  if (sel === 'TODAS') {
-    sacV  = SUBS_ORDER.reduce((s,k)=>s+SAC[k].v,  0);
-    sacPV = SUBS_ORDER.reduce((s,k)=>s+SAC[k].pv, 0);
-    sacAT = SUBS_ORDER.reduce((s,k)=>s+SAC[k].at, 0);
-    orfV  = SUBS_ORDER.reduce((s,k)=>s+ORFEO[k].v,0);
-    chartLabels = SUBS_ORDER.map(s=>SUBS_SHORT[s]);
-    chartAT     = SUBS_ORDER.map(s=>SAC[s].at);
-    chartPV     = SUBS_ORDER.map(s=>SAC[s].pv);
-    chartV      = SUBS_ORDER.map(s=>SAC[s].v);
-    chartRows   = 5;
-    document.getElementById('chart-title').textContent = 'Semáforo SAC — por Subsecretaría';
-    document.getElementById('chart-sub').textContent   = 'Radicados de toda la Secretaría · Corte 30 jun 2026';
-    document.getElementById('header-sub').innerHTML    = 'Secretaría de Educación &nbsp;·&nbsp; Alcaldía de Santiago de Cali &nbsp;·&nbsp; <strong>Todas las subsecretarías</strong>';
-    document.getElementById('vs-sub').textContent      = 'Total combinado de ambos sistemas';
-    document.getElementById('orf-func-sub').textContent= 'Ranking ORFEO — todas las subsecretarías';
-    document.getElementById('sac-func-title').textContent = 'SAC — Funcionarios con Vencidos (todas)';
-
-    const sm = {}; SUBS_ORDER.forEach(s=>SAC[s].procesos.forEach(p=>(p.func||[]).forEach(f=>{sm[f.n]=(sm[f.n]||0)+f.v;})));
-    sacFuncs = Object.entries(sm).map(([n,v])=>({n,v})).sort((a,b)=>b.v-a.v);
-    const om = {}; SUBS_ORDER.forEach(s=>ORFEO[s].func.forEach(f=>{if(!om[f.n])om[f.n]={v:0,sys:f.sys};om[f.n].v+=f.v;}));
-    orfFuncs = Object.entries(om).map(([n,d])=>({n,...d})).sort((a,b)=>b.v-a.v);
-
-    // Mostrar deltas solo en vista TODAS
-    showDelta('d-sac-v', DELTA.sac_v);
-    showDelta('d-orf-v', DELTA.orf_v);
-    const totDelta = (DELTA.sac_v!==null && DELTA.orf_v!==null) ? DELTA.sac_v+DELTA.orf_v : null;
-    showDelta('d-total', totDelta);
-  } else {
-    sacV=SAC[sel].v; sacPV=SAC[sel].pv; sacAT=SAC[sel].at; orfV=ORFEO[sel].v;
+function render(){
+  const sel=document.getElementById('subSelect').value;
+  let sacV,sacPV,sacAT,orfV,sacFuncs,orfFuncs,chartLabels,chartAT,chartPV,chartV,chartRows;
+  if(sel==='TODAS'){
+    sacV=SUBS_ORDER.reduce((s,k)=>s+SAC[k].v,0);sacPV=SUBS_ORDER.reduce((s,k)=>s+SAC[k].pv,0);sacAT=SUBS_ORDER.reduce((s,k)=>s+SAC[k].at,0);orfV=SUBS_ORDER.reduce((s,k)=>s+ORFEO[k].v,0);
+    chartLabels=SUBS_ORDER.map(s=>SUBS_SHORT[s]);chartAT=SUBS_ORDER.map(s=>SAC[s].at);chartPV=SUBS_ORDER.map(s=>SAC[s].pv);chartV=SUBS_ORDER.map(s=>SAC[s].v);chartRows=5;
+    document.getElementById('chart-title').textContent='Semáforo SAC — por Subsecretaría';
+    document.getElementById('header-sub').innerHTML='Secretaría de Educación &nbsp;·&nbsp; Alcaldía de Santiago de Cali &nbsp;·&nbsp; <strong>Todas las subsecretarías</strong>';
+    document.getElementById('vs-sub').textContent='Total combinado de ambos sistemas';
+    document.getElementById('orf-func-sub').textContent='Ranking ORFEO — todas las subsecretarías';
+    document.getElementById('sac-func-title').textContent='SAC — Funcionarios con Vencidos (todas)';
+    const sm={};SUBS_ORDER.forEach(s=>SAC[s].procesos.forEach(p=>(p.func||[]).forEach(f=>{sm[f.n]=(sm[f.n]||0)+f.v;})));
+    sacFuncs=Object.entries(sm).map(([n,v])=>({n,v})).sort((a,b)=>b.v-a.v);
+    const om={};SUBS_ORDER.forEach(s=>ORFEO[s].func.forEach(f=>{if(!om[f.n])om[f.n]={v:0,sys:f.sys};om[f.n].v+=f.v;}));
+    orfFuncs=Object.entries(om).map(([n,d])=>({n,...d})).sort((a,b)=>b.v-a.v);
+    showDelta('d-sac-v',DELTA.sac_v);showDelta('d-orf-v',DELTA.orf_v);
+    const tot=(DELTA.sac_v!==null&&DELTA.orf_v!==null)?DELTA.sac_v+DELTA.orf_v:null;
+    showDelta('d-total',tot);
+  }else{
+    sacV=SAC[sel].v;sacPV=SAC[sel].pv;sacAT=SAC[sel].at;orfV=ORFEO[sel].v;
     const procs=[...SAC[sel].procesos].sort((a,b)=>b.v-a.v);
-    chartLabels=procs.map(p=>p.n); chartAT=procs.map(p=>p.at); chartPV=procs.map(p=>p.pv); chartV=procs.map(p=>p.v); chartRows=procs.length;
+    chartLabels=procs.map(p=>p.n);chartAT=procs.map(p=>p.at);chartPV=procs.map(p=>p.pv);chartV=procs.map(p=>p.v);chartRows=procs.length;
     const short=SUBS_SHORT[sel];
-    document.getElementById('chart-title').textContent = `Semáforo SAC — ${short}`;
-    document.getElementById('chart-sub').textContent   = `Radicados por proceso · Corte 30 jun 2026`;
-    document.getElementById('header-sub').innerHTML    = `Secretaría de Educación &nbsp;·&nbsp; Alcaldía de Santiago de Cali &nbsp;·&nbsp; <strong>${sel}</strong>`;
-    document.getElementById('vs-sub').textContent      = `${short} — ambos sistemas`;
-    document.getElementById('orf-func-sub').textContent= `Radicados ORFEO · ${short}`;
-    document.getElementById('sac-func-title').textContent = `SAC — Funcionarios con Vencidos · ${short}`;
-    const sm={}; SAC[sel].procesos.forEach(p=>(p.func||[]).forEach(f=>{sm[f.n]=(sm[f.n]||0)+f.v;}));
-    sacFuncs = Object.entries(sm).map(([n,v])=>({n,v})).sort((a,b)=>b.v-a.v);
-    orfFuncs = ORFEO[sel].func;
-    // Ocultar deltas en vista por sub
-    ['d-sac-v','d-orf-v','d-total'].forEach(id=>{ const e=document.getElementById(id); if(e) e.innerHTML=''; });
+    document.getElementById('chart-title').textContent=`Semáforo SAC — ${short}`;
+    document.getElementById('header-sub').innerHTML=`Secretaría de Educación &nbsp;·&nbsp; Alcaldía de Santiago de Cali &nbsp;·&nbsp; <strong>${sel}</strong>`;
+    document.getElementById('vs-sub').textContent=`${short} — ambos sistemas`;
+    document.getElementById('orf-func-sub').textContent=`Radicados ORFEO · ${short}`;
+    document.getElementById('sac-func-title').textContent=`SAC — Funcionarios con Vencidos · ${short}`;
+    const sm={};SAC[sel].procesos.forEach(p=>(p.func||[]).forEach(f=>{sm[f.n]=(sm[f.n]||0)+f.v;}));
+    sacFuncs=Object.entries(sm).map(([n,v])=>({n,v})).sort((a,b)=>b.v-a.v);
+    orfFuncs=ORFEO[sel].func;
+    ['d-sac-v','d-orf-v','d-total'].forEach(id=>{const e=document.getElementById(id);if(e)e.innerHTML='';});
   }
-
-  document.getElementById('k-sac-v').textContent  = sacV.toLocaleString('es-CO');
-  document.getElementById('k-orf-v').textContent  = orfV.toLocaleString('es-CO');
-  document.getElementById('k-sac-pv').textContent = sacPV.toLocaleString('es-CO');
-  document.getElementById('k-total').textContent  = (sacV+orfV).toLocaleString('es-CO');
-  document.getElementById('vs-sac').textContent   = sacV.toLocaleString('es-CO');
-  document.getElementById('vs-orf').textContent   = orfV.toLocaleString('es-CO');
-  document.getElementById('vs-total').textContent = (sacV+orfV).toLocaleString('es-CO');
-
-  renderChart(chartLabels, chartAT, chartPV, chartV, chartRows);
-  buildList(sacFuncs, 'sacFuncList', 'red');
-  buildList(orfFuncs, 'orfFuncList', 'navy');
-
-  // Riesgo por proceso
-  let allProcs = [];
-  if (sel==='TODAS') {
-    SUBS_ORDER.forEach(s=>SAC[s].procesos.forEach(p=>allProcs.push({...p,sub:SUBS_SHORT[s]})));
-    document.getElementById('riesgo-title').textContent='SAC — Procesos por % Vencido (todas)';
-  } else {
-    SAC[sel].procesos.forEach(p=>allProcs.push({...p,sub:SUBS_SHORT[sel]}));
-    document.getElementById('riesgo-title').textContent='SAC — Procesos por % Vencido';
-  }
-  const top = allProcs.filter(p=>(p.v+p.pv+p.at)>0)
-    .map(p=>{ const t=p.v+p.pv+p.at; return{...p,pct:Math.round(p.v/t*100)}; })
-    .sort((a,b)=>b.pct-a.pct).slice(0,5);
-  document.getElementById('riesgoList').innerHTML = top.map(r=>{
-    const c  = r.pct>=50?'#C62828':r.pct>=25?'#E65100':'#2E7D32';
-    const bg = r.pct>=50?'#FFEBEE':r.pct>=25?'#FFF3E0':'#E8F5E9';
-    return `<div class="riesgo-item"><div class="riesgo-pct" style="background:${bg}"><span style="color:${c}">${r.pct}%</span></div><div class="riesgo-info"><div class="riesgo-proc">${r.n}</div><div class="riesgo-sub">${r.v} vencidos · ${r.sub}</div></div></div>`;
-  }).join('');
+  document.getElementById('k-sac-v').textContent=sacV.toLocaleString('es-CO');
+  document.getElementById('k-orf-v').textContent=orfV.toLocaleString('es-CO');
+  document.getElementById('k-sac-pv').textContent=sacPV.toLocaleString('es-CO');
+  document.getElementById('k-total').textContent=(sacV+orfV).toLocaleString('es-CO');
+  document.getElementById('vs-sac').textContent=sacV.toLocaleString('es-CO');
+  document.getElementById('vs-orf').textContent=orfV.toLocaleString('es-CO');
+  document.getElementById('vs-total').textContent=(sacV+orfV).toLocaleString('es-CO');
+  renderChart(chartLabels,chartAT,chartPV,chartV,chartRows);
+  buildList(sacFuncs,'sacFuncList','red');
+  buildList(orfFuncs,'orfFuncList','navy');
+  let allProcs=[];
+  if(sel==='TODAS'){SUBS_ORDER.forEach(s=>SAC[s].procesos.forEach(p=>allProcs.push({...p,sub:SUBS_SHORT[s]})));document.getElementById('riesgo-title').textContent='SAC — Procesos por % Vencido (todas)';}
+  else{SAC[sel].procesos.forEach(p=>allProcs.push({...p,sub:SUBS_SHORT[sel]}));document.getElementById('riesgo-title').textContent='SAC — Procesos por % Vencido';}
+  const top=allProcs.filter(p=>(p.v+p.pv+p.at)>0).map(p=>{const t=p.v+p.pv+p.at;return{...p,pct:Math.round(p.v/t*100)};}).sort((a,b)=>b.pct-a.pct).slice(0,5);
+  document.getElementById('riesgoList').innerHTML=top.map(r=>{const c=r.pct>=50?'#C62828':r.pct>=25?'#E65100':'#2E7D32';const bg=r.pct>=50?'#FFEBEE':r.pct>=25?'#FFF3E0':'#E8F5E9';return`<div class="riesgo-item"><div class="riesgo-pct" style="background:${bg}"><span style="color:${c}">${r.pct}%</span></div><div class="riesgo-info"><div class="riesgo-proc">${r.n}</div><div class="riesgo-sub">${r.v} vencidos · ${r.sub}</div></div></div>`;}).join('');
 }
 
-/* ── INIT ─── */
 buildTendChart();
 render();
 </script>
