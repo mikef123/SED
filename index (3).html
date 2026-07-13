@@ -11,8 +11,7 @@
   --rojo-inst:      #C0272D;
   --rojo-inst-grad: linear-gradient(135deg, #8B1A1A 0%, #C0272D 55%, #D32F2F 100%);
   --verde:   #2E7D32; --verde-bg:   #E8F5E9;
-  --amarillo: #F9A825; --amarillo-bg: #FFFDE7;
-  --naranja: #F9A825; --naranja-bg: #FFFDE7;
+  --naranja: #E65100; --naranja-bg: #FFF3E0;
   --rojo:    #C62828; --rojo-bg:    #FFEBEE;
   --azul:    #1565C0; --azul-bg:    #E3F2FD;
   --navy:    #1A3A6B;
@@ -41,11 +40,11 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
 
 /* SEARCH */
 .search-wrap { position: relative; }
-.search-input { background: rgba(255,255,255,0.95); border: 2px solid rgba(255,255,255,0.9); color: #18192A; border-radius: 10px; padding: 9px 34px 9px 36px; font-family: 'Nunito', sans-serif; font-size: 13.5px; font-weight: 600; outline: none; width: 250px; transition: box-shadow .2s, border .2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-.search-input::placeholder { color: #9CA3AF; font-weight: 400; }
-.search-input:focus { border-color: white; box-shadow: 0 0 0 3px rgba(255,255,255,0.35); }
-.search-icon  { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none; color: #6B7280; }
-.search-clear { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; opacity: 0.5; display: none; background: none; border: none; color: #18192A; padding: 2px; line-height: 1; }
+.search-input { background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.4); color: white; border-radius: 10px; padding: 8px 34px 8px 34px; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 600; outline: none; width: 210px; transition: background .2s, border .2s; }
+.search-input::placeholder { color: rgba(255,255,255,0.6); font-weight: 400; }
+.search-input:focus { background: rgba(255,255,255,0.25); border-color: rgba(255,255,255,0.7); }
+.search-icon  { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-size: 13px; pointer-events: none; opacity: 0.8; }
+.search-clear { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; opacity: 0.7; display: none; background: none; border: none; color: white; padding: 2px; line-height: 1; }
 .search-clear:hover { opacity: 1; }
 
 /* ── SEARCH PANEL ───────────────────────── */
@@ -109,7 +108,7 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
 .kpi-desc { font-size: 12px; color: var(--muted); margin-top: 3px; }
 
 /* ── GRID PRINCIPAL ─────────────────────── */
-.grid-main { display: grid; grid-template-columns: 1fr 390px; gap: 18px; margin-bottom: 18px; }
+.grid-main { display: grid; grid-template-columns: 1fr 360px; gap: 18px; margin-bottom: 18px; }
 .right-col { display: flex; flex-direction: column; gap: 16px; }
 .card { background: var(--card); border-radius: 12px; border: 1px solid var(--borde); box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; }
 .card-head { padding: 14px 20px 11px; border-bottom: 1px solid var(--borde); }
@@ -154,7 +153,7 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
 .ver-mas-btn:hover { background: white; border-color: var(--navy); color: var(--navy); }
 
 /* BOTTOM ROW */
-.grid-bottom { display: grid; grid-template-columns: 1fr 390px; gap: 18px; }
+.grid-bottom { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 18px; }
 .mini-card { background: var(--card); border-radius: 12px; border: 1px solid var(--borde); box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; }
 .mini-head { padding: 11px 16px; border-bottom: 1px solid var(--borde); background: #FAFBFC; }
 .mini-title { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
@@ -168,12 +167,10 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
 .riesgo-sub  { font-size: 11px; color: var(--muted); }
 
 /* TENDENCIA */
-.tend-tabs { display: flex; border-bottom: 1px solid var(--borde); }
-.tend-tab { flex: 1; padding: 8px 12px; font-size: 12px; font-weight: 700; background: none; border: none; cursor: pointer; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; font-family: 'Nunito', sans-serif; transition: color .15s; }
-.tend-tab.active { color: var(--texto); border-bottom-color: var(--rojo-inst); }
-.tend-leg-item { display: none; }
-.tend-leg-dot  { display: none; }
-.tend-chart-area { padding: 8px 14px; height: 240px; }
+.tend-legend { display: flex; gap: 14px; padding: 8px 14px 6px; border-bottom: 1px solid var(--borde); }
+.tend-leg-item { display: flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 600; color: var(--muted); }
+.tend-leg-dot { width: 20px; height: 3px; border-radius: 2px; }
+.tend-chart-area { padding: 8px 14px; height: 110px; }
 .tend-primer { padding: 20px 14px; text-align: center; font-size: 12px; color: var(--muted); font-style: italic; }
 .tend-nums { display: flex; gap: 12px; padding: 10px 14px 14px; border-top: 1px solid var(--borde); }
 .tend-lbl { font-size: 10.5px; color: var(--muted); }
@@ -286,13 +283,27 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
       </div>
       <div class="legend">
         <div class="leg-item"><div class="leg-dot" style="background:var(--verde)"></div>A Tiempo (&gt;5 días)</div>
-        <div class="leg-item"><div class="leg-dot" style="background:var(--amarillo)"></div>Por Vencer (0–5 días)</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--naranja)"></div>Por Vencer (0–5 días)</div>
         <div class="leg-item"><div class="leg-dot" style="background:var(--rojo)"></div>Vencido (≤0 días)</div>
       </div>
       <div class="chart-wrap" id="chart-wrap-div" style="height:260px"><canvas id="chartSemaforo"></canvas></div>
     </div>
 
     <div class="right-col">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">SAC vs ORFEO — Vencidos</div>
+          <div class="card-sub" id="vs-sub">Total combinado de ambos sistemas</div>
+        </div>
+        <div class="vs-block">
+          <div class="vs-row">
+            <div class="vs-side"><div class="vs-sys">SAC</div><div class="vs-num-sac" id="vs-sac">—</div><div class="vs-lbl">vencidos</div></div>
+            <div class="vs-sep">vs</div>
+            <div class="vs-side"><div class="vs-sys">ORFEO</div><div class="vs-num-orf" id="vs-orf">—</div><div class="vs-lbl">vencidos</div></div>
+          </div>
+          <div class="total-box"><div class="total-num" id="vs-total">—</div><div class="total-lbl">Total vencidos en ambos sistemas</div></div>
+        </div>
+      </div>
       <div class="card" style="flex:1">
         <div class="card-head">
           <div class="card-title">Top ORFEO — Vencidos por Funcionario</div>
@@ -306,20 +317,29 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
   <!-- FILA INFERIOR -->
   <div class="grid-bottom">
     <div class="mini-card">
-      <div class="tend-tabs">
-        <button class="tend-tab active" id="tab-diario" onclick="switchTend('diario')">📈 Cortes diarios</button>
-        <button class="tend-tab" id="tab-mensual" onclick="switchTend('mensual')">📅 Evolución mensual</button>
-      </div>
-      <div id="tend-legend" style="display:none"></div>
-      <div class="tend-chart-area" id="tend-chart-area"><canvas id="chartTend"></canvas></div>
-      <div class="tend-primer" id="tend-primer" style="display:none">
-        📊 Tendencia disponible desde el 2º corte.<br>
-        <span style="font-size:11px">Actualiza con el siguiente Excel.</span>
-      </div>
-    </div>
-    <div class="mini-card">
       <div class="mini-head"><div class="mini-title" id="sac-func-title">SAC — Top Funcionarios con Vencidos</div></div>
       <div id="sacFuncList"></div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-head"><div class="mini-title" id="riesgo-title">SAC — Dependencias por % Vencido</div></div>
+      <div class="mini-body" id="riesgoList"></div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-head"><div class="mini-title" id="tend-title">Evolución Diaria SAC + ORFEO</div></div>
+      <div class="tend-legend" id="tend-legend">
+        <div class="tend-leg-item"><div class="tend-leg-dot" style="background:var(--rojo)"></div>SAC Vencidos</div>
+        <div class="tend-leg-item"><div class="tend-leg-dot" style="background:var(--navy)"></div>ORFEO Vencidos</div>
+      </div>
+      <div class="tend-chart-area" id="tend-chart-area"><canvas id="chartTend"></canvas></div>
+      <div class="tend-primer" id="tend-primer" style="display:none">
+        📊 Tendencia disponible desde el 2º corte diario.<br>
+        <span style="font-size:11px">Actualiza mañana con el siguiente Excel.</span>
+      </div>
+      <div class="tend-nums">
+        <div><div class="tend-lbl" id="tend-lbl-a">Primer corte</div><div class="tend-val" id="tend-val-a" style="color:var(--rojo)">544</div></div>
+        <div><div class="tend-lbl" id="tend-lbl-b">Último corte</div><div class="tend-val" id="tend-val-b" style="color:var(--rojo)">544</div></div>
+        <div><div class="tend-lbl">Variación SAC</div><div class="tend-val" id="tend-var" style="color:var(--muted)">—</div></div>
+      </div>
     </div>
   </div>
 </main>
@@ -371,7 +391,7 @@ const SUBS_ORDER = ['Despacho','Subsecretaría Administrativa y Financiera','Sub
 const SUBS_SHORT = {'Despacho':'Despacho','Subsecretaría Administrativa y Financiera':'Adm. y Financiera','Subsecretaría de Calidad Educativa':'Calidad Educativa','Subsecretaría de Cobertura Educativa':'Cobertura Educativa','Subsecretaría de Planeación Sectorial':'Planeación Sectorial'};
 
 /* Historial diario (crece con cada corte) */
-const HISTORIAL = [{"f": "20/Ene", "sac": 71, "orf": null}, {"f": "23/Ene", "sac": 71, "orf": null}, {"f": "26/Ene", "sac": 59, "orf": null}, {"f": "30/Ene", "sac": 80, "orf": null}, {"f": "02/Feb", "sac": 83, "orf": null}, {"f": "09/Feb", "sac": 90, "orf": null}, {"f": "16/Feb", "sac": 91, "orf": null}, {"f": "23/Feb", "sac": 84, "orf": null}, {"f": "03/Mar", "sac": 92, "orf": null}, {"f": "09/Mar", "sac": 112, "orf": null}, {"f": "12/Mar", "sac": 82, "orf": null}, {"f": "16/Mar", "sac": 103, "orf": null}, {"f": "24/Mar", "sac": 92, "orf": null}, {"f": "08/Abr", "sac": 145, "orf": null}, {"f": "13/Abr", "sac": 152, "orf": null}, {"f": "20/Abr", "sac": 154, "orf": null}, {"f": "27/Abr", "sac": 178, "orf": null}, {"f": "29/Abr", "sac": 180, "orf": null}, {"f": "04/May", "sac": 195, "orf": null}, {"f": "11/May", "sac": 222, "orf": null}, {"f": "14/May", "sac": 225, "orf": null}, {"f": "22/May", "sac": 244, "orf": null}, {"f": "25/May", "sac": 248, "orf": null}, {"f": "28/May", "sac": 272, "orf": null}, {"f": "01/Jun", "sac": 290, "orf": null}, {"f": "04/Jun", "sac": 313, "orf": null}, {"f": "09/Jun", "sac": 309, "orf": null}, {"f": "12/Jun", "sac": 327, "orf": null}, {"f": "18/Jun", "sac": 302, "orf": null}, {"f": "22/Jun", "sac": 345, "orf": null}, {"f": "25/Jun", "sac": 316, "orf": null}, {"f": "30/Jun", "sac": 295, "orf": null}, {"f": "02/Jul", "sac": 307, "orf": 884}, {"f": "06/Jul", "sac": 316, "orf": 884}, {"f": "07/Jul", "sac": 388, "orf": 900}, {"f": "09/Jul", "sac": 426, "orf": 891}];
+const HISTORIAL = [{"f": "30/Jun", "sac": 544, "orf": 275}, {"f": "02/Jul", "sac": 389, "orf": 884}, {"f": "06/Jul", "sac": 389, "orf": 884}, {"f": "07/Jul", "sac": 388, "orf": 900}, {"f": "10/Jul", "sac": 426, "orf": 891}];
 /* Delta vs corte anterior (null = primer día) */
 const DELTA = {"sac_v": 38, "orf_v": -9};
 
@@ -464,12 +484,10 @@ function switchTab(btn, paneId) {
 function showDelta(id, delta) {
   const el = document.getElementById(id);
   if (!el) return;
-  const prevDate = HISTORIAL.length >= 2 ? HISTORIAL[HISTORIAL.length-2].f : null;
-  const vsLabel = prevDate ? `vs ${prevDate}` : 'vs corte anterior';
   if (delta === null || delta === undefined) { el.innerHTML = ''; return; }
-  if (delta === 0) { el.innerHTML = `<span class="delta-zero">= sin cambio ${vsLabel}</span>`; return; }
+  if (delta === 0) { el.innerHTML = '<span class="delta-zero">= sin cambio vs ayer</span>'; return; }
   const down = delta < 0;
-  el.innerHTML = `<span class="delta-${down?'down':'up'}">${down?'▼':'▲'} ${Math.abs(delta).toLocaleString('es-CO')} ${vsLabel}</span>`;
+  el.innerHTML = `<span class="delta-${down?'down':'up'}">${down?'▼':'▲'} ${Math.abs(delta).toLocaleString('es-CO')} vs ayer</span>`;
 }
 
 /* ══════════════════════════════════════════════════
@@ -522,7 +540,7 @@ function renderChart(labels, atData, pvData, vData, nRows, rawAT, rawPV, rawV) {
     type:'bar',
     data:{ labels, datasets:[
       {label:'A Tiempo',  data:atData, backgroundColor:'#2E7D32', rawData:rawAT||[]},
-      {label:'Por Vencer',data:pvData, backgroundColor:'#F9A825', rawData:rawPV||[]},
+      {label:'Por Vencer',data:pvData, backgroundColor:'#E65100', rawData:rawPV||[]},
       {label:'Vencido',   data:vData,  backgroundColor:'#C62828', rawData:rawV||[]},
     ]},
     options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
@@ -532,47 +550,32 @@ function renderChart(labels, atData, pvData, vData, nRows, rawAT, rawPV, rawV) {
         return raw!==undefined ? ` ${ctx.dataset.label}: ${pct}%  (${raw})` : ` ${ctx.dataset.label}: ${pct}%`;
       }}}},
       scales:{ x:{stacked:true,max:100,grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{family:'Nunito',size:11},color:'#9CA3AF',callback:v=>v+'%'}},
-               y:{stacked:true,grid:{display:false},ticks:{font:{family:'Nunito',size:12},color:'#18192A'},afterFit(ax){ax.width=Math.max(ax.width,160);}} }}
+               y:{stacked:true,grid:{display:false},ticks:{font:{family:'Nunito',size:12},color:'#18192A'}} }}
   });
 }
 
 /* ══════════════════════════════════════════════════
-   TENDENCIA — DIARIA Y MENSUAL
+   TENDENCIA DIARIA
    ══════════════════════════════════════════════════ */
 let tendChart = null;
-let tendMode  = 'diario';
-
-function switchTend(mode) {
-  tendMode = mode;
-  document.getElementById('tab-diario').classList.toggle('active', mode==='diario');
-  document.getElementById('tab-mensual').classList.toggle('active', mode==='mensual');
-  buildTendChart();
-}
-
-function getMonthlyData() {
-  // Agrupa historial por mes, toma el último valor de cada mes
-  const byMonth = {};
-  HISTORIAL.forEach(h => {
-    const parts = h.f.split('/');
-    const mes = parts[1] || h.f;
-    byMonth[mes] = h; // sobrescribe → queda el último del mes
-  });
-  return Object.values(byMonth);
-}
-
 function buildTendChart() {
   const area   = document.getElementById('tend-chart-area');
   const primer = document.getElementById('tend-primer');
   const legend = document.getElementById('tend-legend');
 
-  // Para la gráfica: últimos 14 cortes (diario) o todos agrupados (mensual)
-  const allData  = tendMode === 'mensual' ? getMonthlyData() : HISTORIAL;
-  const data     = tendMode === 'diario'  ? allData.slice(-14) : allData;
-
-  if (data.length < 2) {
+  if (HISTORIAL.length < 2) {
     area.style.display   = 'none';
     legend.style.display = 'none';
     primer.style.display = 'block';
+    document.getElementById('tend-title').textContent = 'Evolución Diaria SAC + ORFEO';
+    document.getElementById('tend-lbl-a').textContent = 'Corte actual';
+    document.getElementById('tend-val-a').textContent = HISTORIAL[0]?.sac ?? '—';
+    document.getElementById('tend-val-a').style.color = 'var(--rojo)';
+    document.getElementById('tend-lbl-b').textContent = 'ORFEO actual';
+    document.getElementById('tend-val-b').textContent = HISTORIAL[0]?.orf ?? '—';
+    document.getElementById('tend-val-b').style.color = 'var(--navy)';
+    document.getElementById('tend-var').textContent = '—';
+    document.getElementById('tend-var').style.color = 'var(--muted)';
     return;
   }
 
@@ -580,17 +583,32 @@ function buildTendChart() {
   legend.style.display = 'flex';
   primer.style.display = 'none';
 
+  const last = HISTORIAL.slice(-14);
+  const first = HISTORIAL[0];
+  const latest = HISTORIAL[HISTORIAL.length - 1];
+  const sacDelta = latest.sac - first.sac;
+  const sacPct   = first.sac > 0 ? Math.round(sacDelta / first.sac * 100) : 0;
+
+  document.getElementById('tend-title').textContent = `Evolución Diaria — últimos ${last.length} cortes`;
+  document.getElementById('tend-lbl-a').textContent = `SAC ${first.f}`;
+  document.getElementById('tend-val-a').textContent = first.sac.toLocaleString('es-CO');
+  document.getElementById('tend-val-a').style.color = 'var(--rojo)';
+  document.getElementById('tend-lbl-b').textContent = `SAC ${latest.f}`;
+  document.getElementById('tend-val-b').textContent = latest.sac.toLocaleString('es-CO');
+  document.getElementById('tend-val-b').style.color = 'var(--rojo)';
+  const varColor = sacDelta <= 0 ? 'var(--verde)' : 'var(--rojo)';
+  document.getElementById('tend-var').textContent = (sacDelta >= 0 ? '+' : '') + sacPct + '%';
+  document.getElementById('tend-var').style.color = varColor;
+
   if (tendChart) { tendChart.destroy(); tendChart = null; }
   tendChart = new Chart(document.getElementById('chartTend').getContext('2d'), {
     type:'line',
-    data:{ labels: data.map(h=>h.f), datasets:[
-      { data: data.map(h=>h.sac), borderColor:'#C62828', backgroundColor:'rgba(198,40,40,0.08)', fill:true, tension:0.35, pointRadius:4, borderWidth:2, label:'SAC', spanGaps:false },
-      { data: data.map(h=>h.orf), borderColor:'#1A3A6B', backgroundColor:'rgba(26,58,107,0.05)', fill:false, tension:0.35, pointRadius:3, borderWidth:1.5, label:'ORFEO', borderDash:[4,3], spanGaps:false }
+    data:{ labels: last.map(h=>h.f), datasets:[
+      { data: last.map(h=>h.sac), borderColor:'#C62828', backgroundColor:'rgba(198,40,40,0.08)', fill:true, tension:0.35, pointRadius:3, borderWidth:2, label:'SAC' },
+      { data: last.map(h=>h.orf), borderColor:'#1A3A6B', backgroundColor:'rgba(26,58,107,0.05)', fill:false, tension:0.35, pointRadius:2, borderWidth:1.5, label:'ORFEO', borderDash:[4,3] }
     ]},
     options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{callbacks:{
-        label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('es-CO')}`
-      }}},
+      plugins:{ legend:{display:false} },
       scales:{
         x:{ grid:{display:false}, ticks:{font:{size:9},color:'#9CA3AF',maxRotation:45} },
         y:{ grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:9},color:'#9CA3AF'}, min:0 }
@@ -622,6 +640,7 @@ function render() {
     document.getElementById('chart-title').textContent = 'Semáforo SAC — por Subsecretaría';
     document.getElementById('chart-sub').textContent   = 'Radicados de toda la Secretaría · Corte 09 Jul 2026';
     document.getElementById('header-sub').innerHTML    = 'Secretaría de Educación &nbsp;·&nbsp; Alcaldía de Santiago de Cali &nbsp;·&nbsp; <strong>Todas las subsecretarías</strong>';
+    document.getElementById('vs-sub').textContent      = 'Total combinado de ambos sistemas';
     document.getElementById('orf-func-sub').textContent= 'Ranking ORFEO — todas las subsecretarías';
     document.getElementById('sac-func-title').textContent = 'SAC — Funcionarios con Vencidos (todas)';
 
@@ -651,6 +670,7 @@ function render() {
     document.getElementById('chart-title').textContent = `Semáforo SAC — ${short}`;
     document.getElementById('chart-sub').textContent   = `Radicados por dependencia · Corte 09 Jul 2026`;
     document.getElementById('header-sub').innerHTML    = `Secretaría de Educación &nbsp;·&nbsp; Alcaldía de Santiago de Cali &nbsp;·&nbsp; <strong>${sel}</strong>`;
+    document.getElementById('vs-sub').textContent      = `${short} — ambos sistemas`;
     document.getElementById('orf-func-sub').textContent= `Radicados ORFEO · ${short}`;
     document.getElementById('sac-func-title').textContent = `SAC — Funcionarios con Vencidos · ${short}`;
     const sm={}; SAC[sel].procesos.forEach(p=>(p.func||[]).forEach(f=>{sm[f.n]=(sm[f.n]||0)+f.v;}));
@@ -664,10 +684,31 @@ function render() {
   document.getElementById('k-orf-v').textContent  = orfV.toLocaleString('es-CO');
   document.getElementById('k-sac-pv').textContent = sacPV.toLocaleString('es-CO');
   document.getElementById('k-total').textContent  = (sacV+orfV).toLocaleString('es-CO');
+  document.getElementById('vs-sac').textContent   = sacV.toLocaleString('es-CO');
+  document.getElementById('vs-orf').textContent   = orfV.toLocaleString('es-CO');
+  document.getElementById('vs-total').textContent = (sacV+orfV).toLocaleString('es-CO');
 
   renderChart(chartLabels, chartAT, chartPV, chartV, chartRows, rawAT, rawPV, rawV);
   buildList(sacFuncs, 'sacFuncList', 'red');
   buildList(orfFuncs, 'orfFuncList', 'navy');
+
+  // Riesgo por dependencia
+  let allProcs = [];
+  if (sel==='TODAS') {
+    SUBS_ORDER.forEach(s=>SAC[s].procesos.forEach(p=>allProcs.push({...p,sub:SUBS_SHORT[s]})));
+    document.getElementById('riesgo-title').textContent='SAC — Dependencias por % Vencido (todas)';
+  } else {
+    SAC[sel].procesos.forEach(p=>allProcs.push({...p,sub:SUBS_SHORT[sel]}));
+    document.getElementById('riesgo-title').textContent='SAC — Dependencias por % Vencido';
+  }
+  const top = allProcs.filter(p=>(p.v+p.pv+p.at)>0)
+    .map(p=>{ const t=p.v+p.pv+p.at; return{...p,pct:Math.round(p.v/t*100)}; })
+    .sort((a,b)=>b.pct-a.pct).slice(0,5);
+  document.getElementById('riesgoList').innerHTML = top.map(r=>{
+    const c  = r.pct>=50?'#C62828':r.pct>=25?'#E65100':'#2E7D32';
+    const bg = r.pct>=50?'#FFEBEE':r.pct>=25?'#FFF3E0':'#E8F5E9';
+    return `<div class="riesgo-item"><div class="riesgo-pct" style="background:${bg}"><span style="color:${c}">${r.pct}%</span></div><div class="riesgo-info"><div class="riesgo-proc">${r.n}</div><div class="riesgo-sub">${r.v} vencidos · ${r.sub}</div></div></div>`;
+  }).join('');
 }
 
 /* ── INIT ─── */
