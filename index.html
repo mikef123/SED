@@ -284,6 +284,10 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
         <div class="card-title" id="chart-title">Semáforo SAC por Dependencia</div>
         <div class="card-sub" id="chart-sub">Radicados abiertos · Corte 22 Jul 2026</div>
       </div>
+      <div class="tend-tabs" style="border-bottom:1px solid var(--borde)">
+        <button class="tend-tab active" id="tab-sema-pct" onclick="switchSema('pct')">% Distribución</button>
+        <button class="tend-tab" id="tab-sema-abs" onclick="switchSema('abs')">Valores absolutos</button>
+      </div>
       <div class="legend">
         <div class="leg-item"><div class="leg-dot" style="background:var(--verde)"></div>A Tiempo (&gt;5 días)</div>
         <div class="leg-item"><div class="leg-dot" style="background:var(--amarillo)"></div>Por Vencer (0–5 días)</div>
@@ -518,14 +522,28 @@ function toggleVerMas(id, btn, total, limit) {
    SEMÁFORO — porcentaje + valor numérico en tooltip
    ══════════════════════════════════════════════════ */
 let myChart = null;
+let semaMode = 'pct';
+let _lastChart = {};
+
+function switchSema(mode) {
+  semaMode = mode;
+  document.getElementById('tab-sema-pct').classList.toggle('active', mode === 'pct');
+  document.getElementById('tab-sema-abs').classList.toggle('active', mode === 'abs');
+  const d = _lastChart;
+  if (d.labels) renderChart(d.labels, d.atData, d.pvData, d.vData, d.nRows, d.rawAT, d.rawPV, d.rawV);
+}
+
 function renderChart(labels, atData, pvData, vData, nRows, rawAT, rawPV, rawV) {
+  _lastChart = { labels, atData, pvData, vData, nRows, rawAT, rawPV, rawV };
   document.getElementById('chart-wrap-div').style.height = Math.max(220, nRows*42) + 'px';
   if (myChart) { myChart.destroy(); myChart = null; }
+  const isPct = semaMode === 'pct';
 
-  // Plugin: dibuja el total de radicados a la derecha de cada barra
+  // Plugin: en modo %, dibuja el total de radicados a la derecha de cada barra
   const totalLabelsPlugin = {
     id: 'totalLabels',
     afterDatasetsDraw(chart) {
+      if (!isPct) return; // en modo absoluto la barra ya muestra los valores
       const { ctx, chartArea: { right }, scales: { y } } = chart;
       chart.data.labels.forEach((_, i) => {
         const total = chart.data.datasets.reduce((s, ds) => s + ((ds.rawData||[])[i] || 0), 0);
@@ -542,23 +560,39 @@ function renderChart(labels, atData, pvData, vData, nRows, rawAT, rawPV, rawV) {
     }
   };
 
+  // En modo absoluto usar rawData; en % usar los datos normalizados
+  const dsAT = isPct ? atData : (rawAT||[]);
+  const dsPV = isPct ? pvData : (rawPV||[]);
+  const dsV  = isPct ? vData  : (rawV||[]);
+
   myChart = new Chart(document.getElementById('chartSemaforo').getContext('2d'), {
     type:'bar',
     data:{ labels, datasets:[
-      {label:'A Tiempo',  data:atData, backgroundColor:'#5C8A3A', rawData:rawAT||[]},
-      {label:'Por Vencer',data:pvData, backgroundColor:'#F0B94A', rawData:rawPV||[]},
-      {label:'Vencido',   data:vData,  backgroundColor:'#E0202A', rawData:rawV||[]},
+      {label:'A Tiempo',  data:dsAT, backgroundColor:'#5C8A3A', rawData:rawAT||[]},
+      {label:'Por Vencer',data:dsPV, backgroundColor:'#F0B94A', rawData:rawPV||[]},
+      {label:'Vencido',   data:dsV,  backgroundColor:'#E0202A', rawData:rawV||[]},
     ]},
+    plugins:[ totalLabelsPlugin ],
     options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
-      layout:{ padding:{ right: 52 } },
+      layout:{ padding:{ right: 60 } },
       plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>{
         const raw = ctx.dataset.rawData[ctx.dataIndex];
-        const pct = ctx.parsed.x;
-        return raw!==undefined ? ` ${ctx.dataset.label}: ${pct}%  (${raw})` : ` ${ctx.dataset.label}: ${pct}%`;
+        const val = ctx.parsed.x;
+        return isPct
+          ? (raw!==undefined ? ` ${ctx.dataset.label}: ${val}%  (${raw})` : ` ${ctx.dataset.label}: ${val}%`)
+          : ` ${ctx.dataset.label}: ${val}`;
       }}}},
-      scales:{ x:{stacked:true,max:100,grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{family:'Nunito',size:11},color:'#828282',callback:v=>v+'%'}},
-               y:{stacked:true,grid:{display:false},ticks:{font:{family:'Nunito',size:12},color:'#18192A'},afterFit(ax){ax.width=Math.max(ax.width,160);}} }}
-  }, [totalLabelsPlugin]);
+      scales:{
+        x:{ stacked:true,
+            ...(isPct ? {max:100} : {}),
+            grid:{color:'rgba(0,0,0,0.04)'},
+            ticks:{font:{family:'Nunito',size:11},color:'#828282',callback:v=>isPct?v+'%':v}},
+        y:{ stacked:true, grid:{display:false},
+            ticks:{font:{family:'Nunito',size:12},color:'#18192A'},
+            afterFit(ax){ax.width=Math.max(ax.width,160);} }
+      }
+    }
+  });
 }
 
 /* ══════════════════════════════════════════════════
