@@ -285,8 +285,8 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
         <div class="card-sub" id="chart-sub">Radicados abiertos · Corte 22 Jul 2026</div>
       </div>
       <div class="tend-tabs" style="border-bottom:1px solid var(--borde)">
-        <button class="tend-tab active" id="tab-sema-pct" onclick="switchSema('pct')">% Distribución</button>
-        <button class="tend-tab" id="tab-sema-abs" onclick="switchSema('abs')">Valores absolutos</button>
+        <button class="tend-tab" id="tab-sema-pct" onclick="switchSema('pct')">% Distribución</button>
+        <button class="tend-tab active" id="tab-sema-abs" onclick="switchSema('abs')">Valores absolutos</button>
       </div>
       <div class="legend">
         <div class="leg-item"><div class="leg-dot" style="background:var(--verde)"></div>A Tiempo (&gt;5 días)</div>
@@ -522,7 +522,7 @@ function toggleVerMas(id, btn, total, limit) {
    SEMÁFORO — porcentaje + valor numérico en tooltip
    ══════════════════════════════════════════════════ */
 let myChart = null;
-let semaMode = 'pct';
+let semaMode = 'abs';
 let _lastChart = {};
 
 function switchSema(mode) {
