@@ -8,16 +8,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root {
-  --rojo-inst:      #C0272D;
-  --rojo-inst-grad: linear-gradient(135deg, #8B1A1A 0%, #C0272D 55%, #D32F2F 100%);
-  --verde:   #2E7D32; --verde-bg:   #E8F5E9;
-  --amarillo: #F9A825; --amarillo-bg: #FFFDE7;
-  --naranja: #F9A825; --naranja-bg: #FFFDE7;
-  --rojo:    #C62828; --rojo-bg:    #FFEBEE;
+  --rojo-inst:      #8C1418;
+  --rojo-inst-grad: linear-gradient(135deg, #6B0F12 0%, #8C1418 55%, #A8181D 100%);
+  --verde:   #5C8A3A; --verde-bg:   #EBF3E4;
+  --amarillo: #F0B94A; --amarillo-bg: #FFF8E8;
+  --naranja: #F0B94A; --naranja-bg: #FFF8E8;
+  --rojo:    #E0202A; --rojo-bg:    #FDEAEA;
   --azul:    #1565C0; --azul-bg:    #E3F2FD;
   --navy:    #1A3A6B;
   --fondo: #EEF0F4; --card: #FFFFFF; --borde: #DDE1E8;
-  --texto: #18192A; --muted: #6B7280;
+  --texto: #18192A; --muted: #828282;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(--texto); font-size: 14px; min-height: 100vh; }
@@ -37,12 +37,12 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
 
 /* DROPDOWN */
 .sub-select { background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.4); color: white; border-radius: 10px; padding: 8px 36px 8px 14px; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; outline: none; min-width: 250px; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='white' d='M6 8L0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; background-color: rgba(255,255,255,0.15); }
-.sub-select option { background: #8B1A1A; color: white; }
+.sub-select option { background: #6B0F12; color: white; }
 
 /* SEARCH */
 .search-wrap { position: relative; }
 .search-input { background: rgba(255,255,255,0.95); border: 2px solid rgba(255,255,255,0.9); color: #18192A; border-radius: 10px; padding: 9px 34px 9px 36px; font-family: 'Nunito', sans-serif; font-size: 13.5px; font-weight: 600; outline: none; width: 250px; transition: box-shadow .2s, border .2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-.search-input::placeholder { color: #9CA3AF; font-weight: 400; }
+.search-input::placeholder { color: #828282; font-weight: 400; }
 .search-input:focus { border-color: white; box-shadow: 0 0 0 3px rgba(255,255,255,0.35); }
 .search-icon  { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none; color: #6B7280; }
 .search-clear { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; cursor: pointer; opacity: 0.5; display: none; background: none; border: none; color: #18192A; padding: 2px; line-height: 1; }
@@ -224,7 +224,7 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
       </div>
       <div class="header-meta">
         <div class="meta-label">Corte de datos</div>
-        <div class="meta-date">9 DE JULIO 2026</div>
+        <div class="meta-date">22 DE JULIO 2026</div>
         <div class="meta-note">Generado automáticamente desde Excel base</div>
       </div>
     </div>
@@ -282,7 +282,7 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
     <div class="card">
       <div class="card-head">
         <div class="card-title" id="chart-title">Semáforo SAC por Dependencia</div>
-        <div class="card-sub" id="chart-sub">Radicados abiertos · Corte 09 Jul 2026</div>
+        <div class="card-sub" id="chart-sub">Radicados abiertos · Corte 22 Jul 2026</div>
       </div>
       <div class="legend">
         <div class="leg-item"><div class="leg-dot" style="background:var(--verde)"></div>A Tiempo (&gt;5 días)</div>
@@ -325,55 +325,58 @@ body { font-family: 'Nunito', sans-serif; background: var(--fondo); color: var(-
 </main>
 
 <div class="footer">
-  Secretaría de Educación de Cali &nbsp;·&nbsp; Seguimiento SAC y ORFEO &nbsp;·&nbsp; Corte: 9 DE JULIO 2026
+  Secretaría de Educación de Cali &nbsp;·&nbsp; Seguimiento SAC y ORFEO &nbsp;·&nbsp; Corte: 22 DE JULIO 2026
   &nbsp;·&nbsp; <strong>SAC</strong>: MEN (&asymp;70% del volumen) &nbsp;·&nbsp; <strong>ORFEO</strong>: Alcaldía (&asymp;30% del volumen)
 </div>
 
 <script>
 /* ══════════════════════════════════════════════════
-   DATOS — Corte 9 DE JULIO 2026
+   DATOS — Corte 22 DE JULIO 2026
    ══════════════════════════════════════════════════ */
 const SAC = {
-  "Despacho": { v:346,pv:72,at:298,procesos:[
-    {n:"Inspecci\u00f3n y Vigilancia",v:336,pv:70,at:270,func:[{"n": "Pedro Pablo Ramirez Lopez", "v": 225}, {"n": "Maria Del Mar  Angulo Florez", "v": 42}, {"n": "Andrea  Solarte Bola\u00f1os", "v": 14}, {"n": "H\u00e9ctor Orlando Arag\u00f3n", "v": 9}, {"n": "Diana Melissa Montealegre Suarez", "v": 8}, {"n": "Carolina Rivera", "v": 5}, {"n": "Fabi\u00e1n Alexis Lasprillla G\u00f3mez", "v": 4}, {"n": "Maira Alejandra  Gonzalez", "v": 4}, {"n": "Carlos Alberto Miranda Palmito", "v": 3}, {"n": "Ebli Yissed Casta\u00f1eda Mera", "v": 3}, {"n": "Jailene Karina Gallego", "v": 3}, {"n": "Susan Piedrahita", "v": 3}, {"n": "Luz Mary Murillo Victoria", "v": 3}, {"n": "Victoria  Eugenia Erazo", "v": 2}, {"n": "Evelyn Marcela Agudelo", "v": 2}, {"n": "Valentina  Guzman Valencia", "v": 1}, {"n": "Ana Ruby  Solis Cifuentes", "v": 1}, {"n": "Mayra Elena Rivas Qui\u00f1ones", "v": 1}, {"n": "Luis Fernando Qui\u00f1onez", "v": 1}, {"n": "Katherine Ramos Rubio", "v": 1}, {"n": "Julian Hernandez Escobar", "v": 1}]},
+  "Despacho": { v:432,pv:90,at:243,procesos:[
+    {n:"Inspecci\u00f3n y Vigilancia",v:418,pv:84,at:225,func:[{"n": "Pedro Pablo Ramirez Lopez", "v": 259}, {"n": "Maria Del Mar  Angulo Florez", "v": 41}, {"n": "Andrea  Solarte Bola\u00f1os", "v": 23}, {"n": "H\u00e9ctor Orlando Arag\u00f3n", "v": 10}, {"n": "Luis Fernando Qui\u00f1onez", "v": 9}, {"n": "Luz Mary Murillo Victoria", "v": 9}, {"n": "Ebli Yissed Casta\u00f1eda Mera", "v": 8}, {"n": "Fabi\u00e1n Alexis Lasprillla G\u00f3mez", "v": 8}, {"n": "Diana Melissa Montealegre Suarez", "v": 8}, {"n": "Carolina Rivera", "v": 7}, {"n": "Mayra Elena Rivas Qui\u00f1ones", "v": 4}, {"n": "Maira Alejandra  Gonzalez", "v": 4}, {"n": "Susan Piedrahita", "v": 4}, {"n": "Marian Rodriguez\tSalas", "v": 4}, {"n": "Carlos Andres  Palacios Pe\u00f1aranda", "v": 4}, {"n": "Evelyn Marcela Agudelo", "v": 3}, {"n": "Carlos Alberto Miranda Palmito", "v": 3}, {"n": "Victoria  Eugenia Erazo", "v": 2}, {"n": "Katherine Ramos Rubio", "v": 2}, {"n": "Jailene Karina Gallego", "v": 1}, {"n": "Christian Fabian Narvaez Ramirez", "v": 1}, {"n": "Cesar Aguirre Zu\u00f1iga", "v": 1}, {"n": "Carolina Galvez Cifuentes", "v": 1}, {"n": "Valentina  Guzman Valencia", "v": 1}, {"n": "Ana Ruby  Solis Cifuentes", "v": 1}]},
+    {n:"Gesti\u00f3n Contractual",v:6,pv:6,at:18,func:[{"n": "Jersey Albeiro  Arango Sanchez", "v": 4}, {"n": "Diana Julieth  Zambrano Noguera", "v": 2}]},
     {n:"Gesti\u00f3n Organizacional",v:6,pv:0,at:0,func:[{"n": "Nydia Montero Narvaez", "v": 6}]},
-    {n:"Despacho",v:2,pv:0,at:2,func:[{"n": "Sara Mercedes Rodas Soto", "v": 2}]},
-    {n:"Gesti\u00f3n Contractual",v:2,pv:2,at:26,func:[{"n": "Jersey Albeiro  Arango Sanchez", "v": 2}]},
+    {n:"Despacho",v:2,pv:0,at:0,func:[{"n": "Sara Mercedes Rodas Soto", "v": 2}]},
   ]},
-  "Subsecretar\u00eda Administrativa y Financiera": { v:68,pv:47,at:874,procesos:[
-    {n:"Liquidaciones Laborales",v:33,pv:8,at:191,func:[{"n": "Pablo Andr\u00e9s Villegas Acu\u00f1a", "v": 12}, {"n": "Juan Carlos Mosquera Medina", "v": 5}, {"n": "Diana Marcela Lopez", "v": 3}, {"n": "Harold Cabrera Martinez", "v": 3}, {"n": "Rosmira Chavarriaga Ramirez", "v": 3}, {"n": "Jennise Fernanda  Benitez", "v": 2}, {"n": "Nicolas  Grueso Obregon", "v": 2}, {"n": "Dora Elsy Londo\u00f1o Ocampo", "v": 1}, {"n": "Manuel Cortez Gonzalez", "v": 1}, {"n": "Maria Jose Barrios Pedroza", "v": 1}]},
-    {n:"Gesti\u00f3n y Desarrollo Humano",v:8,pv:10,at:33,func:[{"n": "Laura Marcela Cruz Garc\u00eda", "v": 6}, {"n": "Luz Ang\u00e9lica P\u00e9rez L\u00f3pez", "v": 2}]},
-    {n:"Subsecretar\u00eda Administrativa y Financiera",v:8,pv:3,at:21,func:[{"n": "Erika Alejandra Bermudez", "v": 8}]},
-    {n:"Administraci\u00f3n de la Planta de Personal",v:6,pv:11,at:155,func:[{"n": "Lina Marcela Hernandez Cano", "v": 3}, {"n": "Alejandro Gomez Duque", "v": 2}, {"n": "Luz Adriana Mosquera Vallecilla", "v": 1}]},
-    {n:"Selecci\u00f3n y Vinculaci\u00f3n del Talento Humano",v:6,pv:7,at:26,func:[{"n": "Juan Pablo Abad\u00eda S\u00e1nchez", "v": 2}, {"n": "Miguel Angel Galeano Ospina", "v": 2}, {"n": "Andrea Del Mar Valencia Chavez", "v": 1}, {"n": "Yissel Patricia  Murillo Arboleda", "v": 1}]},
-    {n:"Prestaciones Sociales",v:5,pv:2,at:66,func:[{"n": "Yeraldine Pantoja Perdomo", "v": 2}, {"n": "Alisson Viviana  Sanchez Garcia", "v": 1}, {"n": "Luis Bernardo Giraldo Molina", "v": 1}, {"n": "Nayla Julieth Menza Casta\u00f1eda", "v": 1}]},
-    {n:"Atenci\u00f3n al Ciudadano",v:1,pv:0,at:3,func:[{"n": "Jorge Enrique  Pertiaga Chiripua", "v": 1}]},
-    {n:"Planeaci\u00f3n del Talento Humano",v:1,pv:2,at:10,func:[{"n": "Humberto Guarnizo Castro", "v": 1}]},
+  "Subsecretar\u00eda Administrativa y Financiera": { v:122,pv:156,at:775,procesos:[
+    {n:"Liquidaciones Laborales",v:54,pv:67,at:68,func:[{"n": "Harold Cabrera Martinez", "v": 11}, {"n": "Pablo Andr\u00e9s Villegas Acu\u00f1a", "v": 11}, {"n": "Dora Elsy Londo\u00f1o Ocampo", "v": 9}, {"n": "Juan Carlos Mosquera Medina", "v": 7}, {"n": "Jennise Fernanda  Benitez", "v": 4}, {"n": "Manuel Cortez Gonzalez", "v": 4}, {"n": "Maria Jose Barrios Pedroza", "v": 3}, {"n": "Rosmira Chavarriaga Ramirez", "v": 2}, {"n": "Diana Marcela Lopez", "v": 1}, {"n": "Natalia Maza Londo\u00f1o", "v": 1}, {"n": "Nicolas  Grueso Obregon", "v": 1}]},
+    {n:"Selecci\u00f3n y Vinculaci\u00f3n del Talento Humano",v:15,pv:3,at:31,func:[{"n": "Miguel Angel Galeano Ospina", "v": 6}, {"n": "Andrea Del Mar Valencia Chavez", "v": 4}, {"n": "Juan Pablo Abad\u00eda S\u00e1nchez", "v": 2}, {"n": "Dyan Jineth Rengifo Lozada", "v": 1}, {"n": "Juan Sebastian Angulo Murillo", "v": 1}, {"n": "Yissel Patricia  Murillo Arboleda", "v": 1}]},
+    {n:"Prestaciones Sociales",v:12,pv:7,at:72,func:[{"n": "Alisson Viviana  Sanchez Garcia", "v": 4}, {"n": "Luz Adriana Molina Palechor", "v": 4}, {"n": "Yeraldine Pantoja Perdomo", "v": 2}, {"n": "Lina Maryuri Lopez Caicedo", "v": 1}, {"n": "Luis Bernardo Giraldo Molina", "v": 1}]},
+    {n:"Administraci\u00f3n de los Sistemas de Evaluaci\u00f3n del Desempe\u00f1o Laboral",v:11,pv:36,at:72,func:[{"n": "Jaime Elias Montoya Londo\u00f1o", "v": 11}]},
+    {n:"Subsecretar\u00eda Administrativa y Financiera",v:10,pv:8,at:7,func:[{"n": "Erika Alejandra Bermudez", "v": 8}, {"n": "Jesus David  Bautista Hernandez", "v": 1}, {"n": "Olga Lucia Ciro Hernandez", "v": 1}]},
+    {n:"Gesti\u00f3n y Desarrollo Humano",v:9,pv:5,at:48,func:[{"n": "Laura Marcela Cruz Garc\u00eda", "v": 6}, {"n": "Luz Ang\u00e9lica P\u00e9rez L\u00f3pez", "v": 2}, {"n": "Carlos Andres Qui\u00f1ones Ruiz", "v": 1}]},
+    {n:"Administraci\u00f3n de la Planta de Personal",v:7,pv:4,at:168,func:[{"n": "Liliana Castro Castro", "v": 3}, {"n": "Alejandro Gomez Duque", "v": 2}, {"n": "Lina Marcela Hernandez Cano", "v": 1}, {"n": "Luz Adriana Mosquera Vallecilla", "v": 1}]},
+    {n:"Atenci\u00f3n al Ciudadano",v:2,pv:0,at:5,func:[{"n": "Alexander Ca\u00f1averal Mensa", "v": 1}, {"n": "Jorge Enrique  Pertiaga Chiripua", "v": 1}]},
+    {n:"Administraci\u00f3n de Historias Laborales",v:1,pv:16,at:173,func:[{"n": "Diego Alexander Sanchez Bravo", "v": 1}]},
+    {n:"Planeaci\u00f3n del Talento Humano",v:1,pv:3,at:7,func:[{"n": "Humberto Guarnizo Castro", "v": 1}]},
   ]},
-  "Subsecretar\u00eda de Calidad Educativa": { v:4,pv:6,at:7,procesos:[
-    {n:"Fortalecimiento de la Calidad del Servicio Educativo",v:3,pv:1,at:7,func:[{"n": "Adriana Qui\u00f1ones Viera", "v": 2}, {"n": "Jos\u00e9 Alveiro Pedreros Marulanda", "v": 1}]},
+  "Subsecretar\u00eda de Calidad Educativa": { v:5,pv:3,at:6,procesos:[
+    {n:"Evaluaci\u00f3n de la Calidad del Servicio Educativo",v:2,pv:0,at:1,func:[{"n": "Diana Patricia Montes  Pe\u00f1a", "v": 2}]},
+    {n:"Fortalecimiento de la Calidad del Servicio Educativo",v:2,pv:3,at:5,func:[{"n": "Jose Ademir Agudo Ramirez", "v": 2}]},
     {n:"Jornada \u00danica Escolar",v:1,pv:0,at:0,func:[{"n": "Mariella  Vallecilla De Collazos", "v": 1}]},
   ]},
-  "Subsecretar\u00eda de Cobertura Educativa": { v:0,pv:1,at:13,procesos:[
+  "Subsecretar\u00eda de Cobertura Educativa": { v:0,pv:3,at:7,procesos:[
   ]},
-  "Subsecretar\u00eda de Planeaci\u00f3n Sectorial": { v:8,pv:5,at:19,procesos:[
-    {n:"Mejoramiento de Ambientes Escolares",v:8,pv:5,at:18,func:[{"n": "Jose Bernardo Saldarriaga", "v": 5}, {"n": "Diego Alejandro Quintero Arce", "v": 2}, {"n": "Andres Guillermo Daza Pabon", "v": 1}]},
+  "Subsecretar\u00eda de Planeaci\u00f3n Sectorial": { v:4,pv:6,at:2,procesos:[
+    {n:"Mejoramiento de Ambientes Escolares",v:4,pv:6,at:2,func:[{"n": "Diego Alejandro Quintero Arce", "v": 3}, {"n": "James  Gonzalez Guevara", "v": 1}]},
   ]},
 };
 const ORFEO = {
-  "Despacho": {v:645,pv:26,at:112,func:[{"n": "Usuario Radicador De Validaciones", "v": 82, "sys": true}, {"n": "Pedro Pablo Ramirez Lopez", "v": 68}, {"n": "Ximena Romero Guerrero", "v": 44}, {"n": "Deisy Zuleima Alegria Hernandez", "v": 42}, {"n": "Nydia Montero Narvaez", "v": 27}, {"n": "Laura Marcela Cruz Garcia", "v": 25}, {"n": "Carolina Rivera", "v": 24}, {"n": "Carlos Andr\u00e9s Palacios Pe\u00f1aranda", "v": 21}, {"n": "Maria Del Mar Angulo Florez", "v": 17}, {"n": "Gina Ileana Arias S\u00e1nchez", "v": 16}, {"n": "Krisna Lila Vasquez Ramirez", "v": 15}, {"n": "Carlos Alberto Garcia Manrique", "v": 14}, {"n": "Mayra Elena Rivas Qui\u00f1ones", "v": 14}, {"n": "\u200b\u200bLuis Felipe \u200bOrtega", "v": 13}, {"n": "Andrea Solarte Bola\u00f1os", "v": 13}, {"n": "Jailene Karina Gallego C", "v": 12}, {"n": "Emma Alejandra Hurtado Cuassi", "v": 11}, {"n": "Luz Marina Angulo De Valentierra", "v": 11}, {"n": "Diana Carolina Pardo Zapata", "v": 9}, {"n": "Luis Fernando Qui\u00f1onez", "v": 8}, {"n": "Adriana Pascuas Canacue", "v": 8}, {"n": "Yezabel Sney Romero Taborda", "v": 8}, {"n": "Caterin Carolina Idrobo Camayo", "v": 6}, {"n": "\u00c1ngel Antonio Leudo Perea", "v": 6}, {"n": "Ferney Antonio Brango Izquierdo", "v": 6}, {"n": "Jamith Antonio Valencia", "v": 6}, {"n": "Maira Alejandra Gonzalez", "v": 6}, {"n": "Nikolle Molina Yagual", "v": 6}, {"n": "Marian Rodriguez Salas", "v": 5}, {"n": "Victoria Eugenia Erazo", "v": 5}, {"n": "Luis Eduardo Junior Ibarguen Betancourth", "v": 5}, {"n": "Luz Mary Murillo Victoria", "v": 5}, {"n": "Carolina Galvez Cifuentes", "v": 4}, {"n": "Ebli Yissed Casta\u00f1eda", "v": 4}, {"n": "Katherine Ramos Rubio", "v": 3}, {"n": "Maria Angelica Rubio", "v": 3}, {"n": "Julian Andres Hernandez Escobar", "v": 3}, {"n": "H\u00e9ctor Orlando Arag\u00f3n", "v": 3}, {"n": "Ana Dolores Lorza", "v": 3}, {"n": "Freddy Ramirez Perez", "v": 3}, {"n": "Evelyn Marcela Agudelo", "v": 3}, {"n": "Elizabeth Balanta Banguera", "v": 3}, {"n": "Carlos Fernado Beltran Lopez", "v": 3}, {"n": "Carolina Sinisterra Obreg\u00f3n", "v": 3}, {"n": "Despacho Educaci\u00f3n", "v": 3, "sys": true}, {"n": "Cesar Aguirre Zu\u00f1iga", "v": 2}, {"n": "Maria Camila Rojas Londo\u00f1o", "v": 2}, {"n": "\u200bFabian Andres Andrade Rengifo", "v": 2}, {"n": "Susan Piedrahita/C/Social", "v": 2}, {"n": "Steven Alberto Garcia Alzate", "v": 2}, {"n": "Sebastian Arias Gutierrez", "v": 2}, {"n": "Roccy Stefany Latorre Pedraza", "v": 2}, {"n": "Ines Yepes Ascencio", "v": 2}, {"n": "Adriana Alejandra Gallego Mar\u00edn", "v": 2}, {"n": "Luisa Maria Amanda Henao Perez", "v": 2}, {"n": "Juliana Antonia Valdes Lozano", "v": 2}, {"n": "Diana Melissa Montealegre Suarez", "v": 2}, {"n": "Edgar Alonso Renteria Trochez", "v": 2}, {"n": "Luis Daniel Quintana", "v": 2}, {"n": "Sthefany Abdul Hadi Guerrero", "v": 1}, {"n": "Gloria Amparo Pe\u00f1a Anchico", "v": 1}, {"n": "Ana Ruby Solis Cifuentes", "v": 1}, {"n": "Angelica Maria Alvarez Mora", "v": 1}, {"n": "Armando Velez Velez", "v": 1}, {"n": "Valentina Guzman Valencia", "v": 1}, {"n": "Camila Jim\u00e9nez Ledesma", "v": 1}, {"n": "Maria Camila Arzayus Zu\u00f1iga", "v": 1}, {"n": "Fabi\u00e1n Alexis Lasprillla G\u00f3mez", "v": 1}, {"n": "David Arturo Cuero Tenorio", "v": 1}, {"n": "Santiago Moreno Victoria", "v": 1}, {"n": "Camilo Alberto Ordo\u00f1ez Valencia", "v": 1}, {"n": "Paola Andrea Silva", "v": 1}, {"n": "Oscar Enrique Sandino Gomez - Jur", "v": 1}, {"n": "Edgar Alberto Gomez Palomino", "v": 1}, {"n": "Mallerly Ceron Fajardo", "v": 1}, {"n": "Marly Barragan Charry", "v": 1}, {"n": "Juan Carlos Campo Rivera", "v": 1}]},
-  "Subsecretar\u00eda Administrativa y Financiera": {v:206,pv:33,at:72,func:[{"n": "Despacho Sub. Administrativa Y Financiera", "v": 26, "sys": true}, {"n": "Dyan Gineth Rengifo Lozada", "v": 21}, {"n": "Diana Patricia Montes Pe\u00f1a", "v": 15}, {"n": "Juan Pablo Abad\u00eda S\u00e1nchez", "v": 14}, {"n": "Lorenza Santos Barbosa", "v": 10}, {"n": "Miguel Angel Galeano Ospina", "v": 8}, {"n": "Pedro Kadir Zamora Rengifo", "v": 8}, {"n": "Mar\u00eda Jos\u00e9 Barrios Pedroza", "v": 8}, {"n": "Diana Marcela Lopez", "v": 7}, {"n": "Naila Yulieth Menza Casta\u00f1eda", "v": 7}, {"n": "Ayda Marcelapalacios Guerra", "v": 6}, {"n": "Monica Lucia Zu\u00f1iga Motato", "v": 5}, {"n": "Laura Isabel Gomez Garcia", "v": 4}, {"n": "Yulli Liliana Rosero Ram\u00edrez", "v": 4}, {"n": "Lina Vanesa Grijalba", "v": 4}, {"n": "Gersson Nikolai Bermudez Lozano", "v": 3}, {"n": "William Andres Gonzalez Sandoval", "v": 3}, {"n": "Idali Moreno", "v": 3}, {"n": "Jenisse Fernanda Benitez Beltran", "v": 3}, {"n": "Marisol Ospina Hincapie", "v": 3}, {"n": "Sandra Milena Qui\u00f1onez Romero", "v": 3}, {"n": "Luz Angelica Perez Lopez", "v": 2}, {"n": "Yissel Patricia Murillo Arboleda", "v": 2}, {"n": "Paola Jennyfer Carvajal Taborda", "v": 2}, {"n": "Luis Zuluaga", "v": 2}, {"n": "Lina Marcela Hernandez Cano", "v": 2}, {"n": "Dora Elsy Londo\u00f1o", "v": 2}, {"n": "Laura Sofia Marquez Rivas", "v": 2}, {"n": "Juan Carlos Mosquera Medina", "v": 2}, {"n": "David Alejandro Carabali", "v": 2}, {"n": "Diana Paola L\u00f3pez Quintero", "v": 2}, {"n": "Liliana Castro Castro", "v": 2}, {"n": "Andrea Calero Fernandez", "v": 1}, {"n": "Yolima Uzuriaga Diaz", "v": 1}, {"n": "Clara Ines Zuluaga Rios", "v": 1}, {"n": "Yeraldine Pantoja Perdomo", "v": 1}, {"n": "Vanessa Galvez Restrepo", "v": 1}, {"n": "Deisy Patricia Gonzalez Figueroa", "v": 1}, {"n": "Diana Carolina Londo\u00f1o Palacios", "v": 1}, {"n": "Pablo Andr\u00e9s Villegas Acu\u00f1a", "v": 1}, {"n": "Monica Julieth Cala Grupo Administrativo", "v": 1}, {"n": "Gerardo Vernaza Narvaez", "v": 1}, {"n": "Glasford Britton Livingston", "v": 1}, {"n": "Mayerlin Pabon Noguera", "v": 1}, {"n": "Jaime Elias Montoya Londo\u00f1o", "v": 1}, {"n": "Jonathan Bedoya Cifuentes", "v": 1}, {"n": "Mariela Alomia Placides", "v": 1}, {"n": "Luz Janlleny Londo\u00f1o S\u00e1nchez", "v": 1}, {"n": "Luz Adriana Molina Palechor", "v": 1}, {"n": "Luis Bernardo Giraldo Molina", "v": 1}, {"n": "Alisson Viviana Sanchez Garcia", "v": 1}]},
-  "Subsecretar\u00eda de Calidad Educativa": {v:13,pv:2,at:2,func:[{"n": "Adriana Quinones", "v": 7}, {"n": "Despacho Subsecretar\u00eda De Calidad Educativa", "v": 3}, {"n": "Mariela Vallecilla", "v": 2}, {"n": "Valentina Lozano Lopez", "v": 1}]},
-  "Subsecretar\u00eda de Cobertura Educativa": {v:2,pv:1,at:13,func:[{"n": "Carolina Moreno Ortiz", "v": 1}, {"n": "Jhon Alexander Casta\u00f1o Perez", "v": 1}]},
-  "Subsecretar\u00eda de Planeaci\u00f3n Sectorial": {v:25,pv:3,at:6,func:[{"n": "Jose Bernardo Saldarriaga Romero", "v": 14}, {"n": "Diego Alejandro Quintero Arce", "v": 3}, {"n": "Carlos Hernando Forero Rubio", "v": 2}, {"n": "Melissa Varela Flor", "v": 2}, {"n": "Daniel Eduardo Echeverri Villa", "v": 1}, {"n": "Despacho Subecretar\u00eda De Planeacion Sectorial", "v": 1}, {"n": "Diana Marcela Quiroga Garzon", "v": 1}, {"n": "Juan Carlos Alvarez Salazar", "v": 1}]},
+  "Despacho": {v:692,pv:48,at:88,func:[{"n": "Usuario Radicador De Validaciones", "v": 86, "sys": true}, {"n": "Pedro Pablo Ramirez Lopez", "v": 75}, {"n": "Ximena Romero Guerrero", "v": 50}, {"n": "Despacho Educaci\u00f3n", "v": 32, "sys": true}, {"n": "Nydia Montero Narvaez", "v": 27}, {"n": "Laura Marcela Cruz Garcia", "v": 26}, {"n": "Deisy Zuleima Alegria Hernandez", "v": 26}, {"n": "Carolina Rivera", "v": 25}, {"n": "Carlos Andr\u00e9s Palacios Pe\u00f1aranda", "v": 21}, {"n": "Andrea Solarte Bola\u00f1os", "v": 18}, {"n": "Maria Del Mar Angulo Florez", "v": 17}, {"n": "Gina Ileana Arias S\u00e1nchez", "v": 16}, {"n": "Krisna Lila Vasquez Ramirez", "v": 15}, {"n": "Mayra Elena Rivas Qui\u00f1ones", "v": 14}, {"n": "Carlos Alberto Garcia Manrique", "v": 14}, {"n": "\u200b\u200bLuis Felipe \u200bOrtega", "v": 13}, {"n": "Jailene Karina Gallego C", "v": 12}, {"n": "Luis Fernando Qui\u00f1onez", "v": 12}, {"n": "Luz Marina Angulo De Valentierra", "v": 11}, {"n": "Emma Alejandra Hurtado Cuassi", "v": 11}, {"n": "Diana Carolina Pardo Zapata", "v": 9}, {"n": "Yezabel Sney Romero Taborda", "v": 8}, {"n": "Ferney Antonio Brango Izquierdo", "v": 7}, {"n": "Carolina Galvez Cifuentes", "v": 6}, {"n": "Maira Alejandra Gonzalez", "v": 6}, {"n": "Nikolle Molina Yagual", "v": 6}, {"n": "\u00c1ngel Antonio Leudo Perea", "v": 6}, {"n": "Jamith Antonio Valencia", "v": 6}, {"n": "Luz Mary Murillo Victoria", "v": 6}, {"n": "Caterin Carolina Idrobo Camayo", "v": 6}, {"n": "Marian Rodriguez Salas", "v": 5}, {"n": "Victoria Eugenia Erazo", "v": 5}, {"n": "Ebli Yissed Casta\u00f1eda", "v": 5}, {"n": "Cesar Aguirre Zu\u00f1iga", "v": 5}, {"n": "Katherine Ramos Rubio", "v": 4}, {"n": "Evelyn Marcela Agudelo", "v": 4}, {"n": "Steven Alberto Garcia Alzate", "v": 4}, {"n": "Susan Piedrahita/C/Social", "v": 4}, {"n": "Diana Melissa Montealegre Suarez", "v": 4}, {"n": "Carlos Fernado Beltran Lopez", "v": 4}, {"n": "Ines Yepes Ascencio", "v": 3}, {"n": "H\u00e9ctor Orlando Arag\u00f3n", "v": 3}, {"n": "Ana Dolores Lorza", "v": 3}, {"n": "Julian Andres Hernandez Escobar", "v": 3}, {"n": "Freddy Ramirez Perez", "v": 3}, {"n": "Maria Angelica Rubio", "v": 3}, {"n": "Elizabeth Balanta Banguera", "v": 3}, {"n": "Roccy Stefany Latorre Pedraza", "v": 2}, {"n": "Sebastian Arias Gutierrez", "v": 2}, {"n": "\u200bFabian Andres Andrade Rengifo", "v": 2}, {"n": "Maria Camila Rojas Londo\u00f1o", "v": 2}, {"n": "Adriana Alejandra Gallego Mar\u00edn", "v": 2}, {"n": "Edgar Alonso Renteria Trochez", "v": 2}, {"n": "Luisa Maria Amanda Henao Perez", "v": 2}, {"n": "Luis Daniel Quintana", "v": 2}, {"n": "Juliana Antonia Valdes Lozano", "v": 2}, {"n": "Carolina Sinisterra Obreg\u00f3n", "v": 2}, {"n": "Maria Camila Arzayus Zu\u00f1iga", "v": 1}, {"n": "Ana Ruby Solis Cifuentes", "v": 1}, {"n": "Angelica Maria Alvarez Mora", "v": 1}, {"n": "Armando Velez Velez", "v": 1}, {"n": "Camilo Alberto Ordo\u00f1ez Valencia", "v": 1}, {"n": "Valentina Guzman Valencia", "v": 1}, {"n": "David Arturo Cuero Tenorio", "v": 1}, {"n": "Edgar Alberto Gomez Palomino", "v": 1}, {"n": "Sthefany Abdul Hadi Guerrero", "v": 1}, {"n": "Santiago Moreno Victoria", "v": 1}, {"n": "Fabi\u00e1n Alexis Lasprillla G\u00f3mez", "v": 1}, {"n": "Mallerly Ceron Fajardo", "v": 1}, {"n": "Gloria Amparo Pe\u00f1a Anchico", "v": 1}, {"n": "Jersey Albeiro Arango Sanchez", "v": 1}, {"n": "Paola Andrea Silva", "v": 1}, {"n": "Oscar Enrique Sandino Gomez - Jur", "v": 1}, {"n": "Jorge Carlos Figueroa Ortiz", "v": 1}, {"n": "Jos\u00e9 Luis Oviedo L\u00f3pez", "v": 1}, {"n": "Marly Barragan Charry", "v": 1}, {"n": "Juan Carlos Campo Rivera", "v": 1}]},
+  "Subsecretar\u00eda Administrativa y Financiera": {v:214,pv:37,at:56,func:[{"n": "Dyan Gineth Rengifo Lozada", "v": 32}, {"n": "Diana Patricia Montes Pe\u00f1a", "v": 15}, {"n": "Juan Pablo Abad\u00eda S\u00e1nchez", "v": 14}, {"n": "Mar\u00eda Jos\u00e9 Barrios Pedroza", "v": 13}, {"n": "Miguel Angel Galeano Ospina", "v": 9}, {"n": "Pedro Kadir Zamora Rengifo", "v": 7}, {"n": "Naila Yulieth Menza Casta\u00f1eda", "v": 7}, {"n": "Diana Marcela Lopez", "v": 7}, {"n": "Ayda Marcelapalacios Guerra", "v": 6}, {"n": "Despacho Sub. Administrativa Y Financiera", "v": 6, "sys": true}, {"n": "Monica Lucia Zu\u00f1iga Motato", "v": 6}, {"n": "Lorenza Santos Barbosa", "v": 5}, {"n": "Lina Vanesa Grijalba", "v": 4}, {"n": "Jenisse Fernanda Benitez Beltran", "v": 4}, {"n": "Sandra Milena Qui\u00f1onez Romero", "v": 4}, {"n": "Laura Isabel Gomez Garcia", "v": 4}, {"n": "Yulli Liliana Rosero Ram\u00edrez", "v": 4}, {"n": "Jaime Elias Montoya Londo\u00f1o", "v": 4}, {"n": "Idali Moreno", "v": 3}, {"n": "Milcen Ortiz Salcedo", "v": 3}, {"n": "Diego Alexander Sanchez Bravo", "v": 3}, {"n": "William Andres Gonzalez Sandoval", "v": 3}, {"n": "Deisy Patricia Gonzalez Figueroa", "v": 3}, {"n": "Monica Betancur Palacios", "v": 2}, {"n": "Laura Sofia Marquez Rivas", "v": 2}, {"n": "Liliana Castro Castro", "v": 2}, {"n": "Lina Marcela Hernandez Cano", "v": 2}, {"n": "David Alejandro Carabali", "v": 2}, {"n": "Diana Paola L\u00f3pez Quintero", "v": 2}, {"n": "Luis Felipe Plaza Arcila", "v": 2}, {"n": "Luis Zuluaga", "v": 2}, {"n": "Juan Carlos Mosquera Medina", "v": 2}, {"n": "Luz Angelica Perez Lopez", "v": 2}, {"n": "Nicolas Grueso Obregon", "v": 2}, {"n": "Luz Stella Echeverria", "v": 2}, {"n": "Yissel Patricia Murillo Arboleda", "v": 2}, {"n": "Dora Elsy Londo\u00f1o", "v": 2}, {"n": "Diana Carolina Londo\u00f1o Palacios", "v": 1}, {"n": "Yolima Uzuriaga Diaz", "v": 1}, {"n": "Yeraldine Pantoja Perdomo", "v": 1}, {"n": "Natalia Maza Londo\u00f1o", "v": 1}, {"n": "Vanessa Galvez Restrepo", "v": 1}, {"n": "Pablo Andr\u00e9s Villegas Acu\u00f1a", "v": 1}, {"n": "Mariela Alomia Placides", "v": 1}, {"n": "Monica Julieth Cala Grupo Administrativo", "v": 1}, {"n": "Mayerlin Pabon Noguera", "v": 1}, {"n": "Jesus Alonso Rengifo Diaz", "v": 1}, {"n": "Luz Janlleny Londo\u00f1o S\u00e1nchez", "v": 1}, {"n": "Luz Adriana Molina Palechor", "v": 1}, {"n": "Luis Bernardo Giraldo Molina", "v": 1}, {"n": "Gerardo Vernaza Narvaez", "v": 1}, {"n": "Andrea Calero Fernandez", "v": 1}, {"n": "Glasford Britton Livingston", "v": 1}, {"n": "Julia Elisa Herrera Caraballo", "v": 1}, {"n": "Jorge Hern\u00e1n Cardona", "v": 1}, {"n": "Jonathan Bedoya Cifuentes", "v": 1}, {"n": "Alisson Viviana Sanchez Garcia", "v": 1}]},
+  "Subsecretar\u00eda de Calidad Educativa": {v:14,pv:2,at:6,func:[{"n": "Adriana Quinones", "v": 7}, {"n": "Despacho Subsecretar\u00eda De Calidad Educativa", "v": 3}, {"n": "Mariela Vallecilla", "v": 2}, {"n": "Erick Francisco Castro Ocoro", "v": 1}, {"n": "Valentina Lozano Lopez", "v": 1}]},
+  "Subsecretar\u00eda de Cobertura Educativa": {v:3,pv:8,at:10,func:[{"n": "Jhon Alexander Casta\u00f1o Perez", "v": 2}, {"n": "Carolina Moreno Ortiz", "v": 1}]},
+  "Subsecretar\u00eda de Planeaci\u00f3n Sectorial": {v:21,pv:2,at:11,func:[{"n": "Jose Bernardo Saldarriaga Romero", "v": 8}, {"n": "Diego Alejandro Quintero Arce", "v": 3}, {"n": "Melissa Varela Flor", "v": 3}, {"n": "Carlos Hernando Forero Rubio", "v": 2}, {"n": "Despacho Subecretar\u00eda De Planeacion Sectorial", "v": 2}, {"n": "Daniel Eduardo Echeverri Villa", "v": 1}, {"n": "Juan Camilo Castro Barrera", "v": 1}, {"n": "Oscar Ivan Carmona Carvajal", "v": 1}]},
 };
 const SUBS_ORDER = ['Despacho','Subsecretaría Administrativa y Financiera','Subsecretaría de Calidad Educativa','Subsecretaría de Cobertura Educativa','Subsecretaría de Planeación Sectorial'];
 const SUBS_SHORT = {'Despacho':'Despacho','Subsecretaría Administrativa y Financiera':'Adm. y Financiera','Subsecretaría de Calidad Educativa':'Calidad Educativa','Subsecretaría de Cobertura Educativa':'Cobertura Educativa','Subsecretaría de Planeación Sectorial':'Planeación Sectorial'};
 
 /* Historial diario (crece con cada corte) */
-const HISTORIAL = [{"f": "20/Ene", "sac": 71, "orf": null}, {"f": "23/Ene", "sac": 71, "orf": null}, {"f": "26/Ene", "sac": 59, "orf": null}, {"f": "30/Ene", "sac": 80, "orf": null}, {"f": "02/Feb", "sac": 83, "orf": null}, {"f": "09/Feb", "sac": 90, "orf": null}, {"f": "16/Feb", "sac": 91, "orf": null}, {"f": "23/Feb", "sac": 84, "orf": null}, {"f": "03/Mar", "sac": 92, "orf": null}, {"f": "09/Mar", "sac": 112, "orf": null}, {"f": "12/Mar", "sac": 82, "orf": null}, {"f": "16/Mar", "sac": 103, "orf": null}, {"f": "24/Mar", "sac": 92, "orf": null}, {"f": "08/Abr", "sac": 145, "orf": null}, {"f": "13/Abr", "sac": 152, "orf": null}, {"f": "20/Abr", "sac": 154, "orf": null}, {"f": "27/Abr", "sac": 178, "orf": null}, {"f": "29/Abr", "sac": 180, "orf": null}, {"f": "04/May", "sac": 195, "orf": null}, {"f": "11/May", "sac": 222, "orf": null}, {"f": "14/May", "sac": 225, "orf": null}, {"f": "22/May", "sac": 244, "orf": null}, {"f": "25/May", "sac": 248, "orf": null}, {"f": "28/May", "sac": 272, "orf": null}, {"f": "01/Jun", "sac": 290, "orf": null}, {"f": "04/Jun", "sac": 313, "orf": null}, {"f": "09/Jun", "sac": 309, "orf": null}, {"f": "12/Jun", "sac": 327, "orf": null}, {"f": "18/Jun", "sac": 302, "orf": null}, {"f": "22/Jun", "sac": 345, "orf": null}, {"f": "25/Jun", "sac": 316, "orf": null}, {"f": "30/Jun", "sac": 295, "orf": null}, {"f": "02/Jul", "sac": 307, "orf": 884}, {"f": "06/Jul", "sac": 316, "orf": 884}, {"f": "07/Jul", "sac": 388, "orf": 900}, {"f": "09/Jul", "sac": 426, "orf": 891}];
+const HISTORIAL = [{"f": "20/Ene", "sac": 71, "orf": null}, {"f": "23/Ene", "sac": 71, "orf": null}, {"f": "26/Ene", "sac": 59, "orf": null}, {"f": "30/Ene", "sac": 80, "orf": null}, {"f": "02/Feb", "sac": 83, "orf": null}, {"f": "09/Feb", "sac": 90, "orf": null}, {"f": "16/Feb", "sac": 91, "orf": null}, {"f": "23/Feb", "sac": 84, "orf": null}, {"f": "03/Mar", "sac": 92, "orf": null}, {"f": "09/Mar", "sac": 112, "orf": null}, {"f": "12/Mar", "sac": 82, "orf": null}, {"f": "16/Mar", "sac": 103, "orf": null}, {"f": "24/Mar", "sac": 92, "orf": null}, {"f": "08/Abr", "sac": 145, "orf": null}, {"f": "13/Abr", "sac": 152, "orf": null}, {"f": "20/Abr", "sac": 154, "orf": null}, {"f": "27/Abr", "sac": 178, "orf": null}, {"f": "29/Abr", "sac": 180, "orf": null}, {"f": "04/May", "sac": 195, "orf": null}, {"f": "11/May", "sac": 222, "orf": null}, {"f": "14/May", "sac": 225, "orf": null}, {"f": "22/May", "sac": 244, "orf": null}, {"f": "25/May", "sac": 248, "orf": null}, {"f": "28/May", "sac": 272, "orf": null}, {"f": "01/Jun", "sac": 290, "orf": null}, {"f": "04/Jun", "sac": 313, "orf": null}, {"f": "09/Jun", "sac": 309, "orf": null}, {"f": "12/Jun", "sac": 327, "orf": null}, {"f": "18/Jun", "sac": 302, "orf": null}, {"f": "22/Jun", "sac": 345, "orf": null}, {"f": "25/Jun", "sac": 316, "orf": null}, {"f": "30/Jun", "sac": 295, "orf": null}, {"f": "02/Jul", "sac": 307, "orf": 884}, {"f": "06/Jul", "sac": 316, "orf": 884}, {"f": "07/Jul", "sac": 388, "orf": 900}, {"f": "09/Jul", "sac": 426, "orf": 891}, {"f": "22/Jul", "sac": 563, "orf": 944}];
 /* Delta vs corte anterior (null = primer día) */
-const DELTA = {"sac_v": 38, "orf_v": -9};
+const DELTA = {"sac_v": 137, "orf_v": 53};
 
 /* ══════════════════════════════════════════════════
    ÍNDICE DE BÚSQUEDA
@@ -518,22 +521,44 @@ let myChart = null;
 function renderChart(labels, atData, pvData, vData, nRows, rawAT, rawPV, rawV) {
   document.getElementById('chart-wrap-div').style.height = Math.max(220, nRows*42) + 'px';
   if (myChart) { myChart.destroy(); myChart = null; }
+
+  // Plugin: dibuja el total de radicados a la derecha de cada barra
+  const totalLabelsPlugin = {
+    id: 'totalLabels',
+    afterDatasetsDraw(chart) {
+      const { ctx, chartArea: { right }, scales: { y } } = chart;
+      chart.data.labels.forEach((_, i) => {
+        const total = chart.data.datasets.reduce((s, ds) => s + ((ds.rawData||[])[i] || 0), 0);
+        if (!total) return;
+        const yPos = y.getPixelForValue(i);
+        ctx.save();
+        ctx.font = '700 11px Nunito, sans-serif';
+        ctx.fillStyle = '#828282';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(total.toLocaleString('es-CO'), right + 8, yPos);
+        ctx.restore();
+      });
+    }
+  };
+
   myChart = new Chart(document.getElementById('chartSemaforo').getContext('2d'), {
     type:'bar',
     data:{ labels, datasets:[
-      {label:'A Tiempo',  data:atData, backgroundColor:'#2E7D32', rawData:rawAT||[]},
-      {label:'Por Vencer',data:pvData, backgroundColor:'#F9A825', rawData:rawPV||[]},
-      {label:'Vencido',   data:vData,  backgroundColor:'#C62828', rawData:rawV||[]},
+      {label:'A Tiempo',  data:atData, backgroundColor:'#5C8A3A', rawData:rawAT||[]},
+      {label:'Por Vencer',data:pvData, backgroundColor:'#F0B94A', rawData:rawPV||[]},
+      {label:'Vencido',   data:vData,  backgroundColor:'#E0202A', rawData:rawV||[]},
     ]},
     options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      layout:{ padding:{ right: 52 } },
       plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>{
         const raw = ctx.dataset.rawData[ctx.dataIndex];
         const pct = ctx.parsed.x;
         return raw!==undefined ? ` ${ctx.dataset.label}: ${pct}%  (${raw})` : ` ${ctx.dataset.label}: ${pct}%`;
       }}}},
-      scales:{ x:{stacked:true,max:100,grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{family:'Nunito',size:11},color:'#9CA3AF',callback:v=>v+'%'}},
+      scales:{ x:{stacked:true,max:100,grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{family:'Nunito',size:11},color:'#828282',callback:v=>v+'%'}},
                y:{stacked:true,grid:{display:false},ticks:{font:{family:'Nunito',size:12},color:'#18192A'},afterFit(ax){ax.width=Math.max(ax.width,160);}} }}
-  });
+  }, [totalLabelsPlugin]);
 }
 
 /* ══════════════════════════════════════════════════
@@ -584,7 +609,7 @@ function buildTendChart() {
   tendChart = new Chart(document.getElementById('chartTend').getContext('2d'), {
     type:'line',
     data:{ labels: data.map(h=>h.f), datasets:[
-      { data: data.map(h=>h.sac), borderColor:'#C62828', backgroundColor:'rgba(198,40,40,0.08)', fill:true, tension:0.35, pointRadius:4, borderWidth:2, label:'SAC', spanGaps:false },
+      { data: data.map(h=>h.sac), borderColor:'#E0202A', backgroundColor:'rgba(224,32,42,0.08)', fill:true, tension:0.35, pointRadius:4, borderWidth:2, label:'SAC', spanGaps:false },
       { data: data.map(h=>h.orf), borderColor:'#1A3A6B', backgroundColor:'rgba(26,58,107,0.05)', fill:false, tension:0.35, pointRadius:3, borderWidth:1.5, label:'ORFEO', borderDash:[4,3], spanGaps:false }
     ]},
     options:{ responsive:true, maintainAspectRatio:false,
@@ -592,8 +617,8 @@ function buildTendChart() {
         label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('es-CO')}`
       }}},
       scales:{
-        x:{ grid:{display:false}, ticks:{font:{size:9},color:'#9CA3AF',maxRotation:45} },
-        y:{ grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:9},color:'#9CA3AF'}, min:0 }
+        x:{ grid:{display:false}, ticks:{font:{size:9},color:'#828282',maxRotation:45} },
+        y:{ grid:{color:'rgba(0,0,0,0.05)'}, ticks:{font:{size:9},color:'#828282'}, min:0 }
       }}
   });
 }
@@ -620,7 +645,7 @@ function render() {
     rawV  = _subs.map(s=>SAC[s].v);
     chartRows = _subs.length;
     document.getElementById('chart-title').textContent = 'Semáforo SAC — por Subsecretaría';
-    document.getElementById('chart-sub').textContent   = 'Radicados de toda la Secretaría · Corte 09 Jul 2026';
+    document.getElementById('chart-sub').textContent   = 'Radicados de toda la Secretaría · Corte 22 Jul 2026';
     document.getElementById('header-sub').innerHTML    = 'Secretaría de Educación &nbsp;·&nbsp; Alcaldía de Santiago de Cali &nbsp;·&nbsp; <strong>Todas las subsecretarías</strong>';
     document.getElementById('orf-func-sub').textContent= 'Ranking ORFEO — todas las subsecretarías';
     document.getElementById('sac-func-title').textContent = 'SAC — Funcionarios con Vencidos (todas)';
@@ -649,7 +674,7 @@ function render() {
     chartRows=procs.length;
     const short=SUBS_SHORT[sel];
     document.getElementById('chart-title').textContent = `Semáforo SAC — ${short}`;
-    document.getElementById('chart-sub').textContent   = `Radicados por dependencia · Corte 09 Jul 2026`;
+    document.getElementById('chart-sub').textContent   = `Radicados por dependencia · Corte 22 Jul 2026`;
     document.getElementById('header-sub').innerHTML    = `Secretaría de Educación &nbsp;·&nbsp; Alcaldía de Santiago de Cali &nbsp;·&nbsp; <strong>${sel}</strong>`;
     document.getElementById('orf-func-sub').textContent= `Radicados ORFEO · ${short}`;
     document.getElementById('sac-func-title').textContent = `SAC — Funcionarios con Vencidos · ${short}`;
